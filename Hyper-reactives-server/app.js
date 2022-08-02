@@ -9,17 +9,20 @@ require("dotenv").config();
 
 // DB Connection
 mongoose.connect(process.env.DATABASE, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
 }).then(() => {
-  console.log("DB CONNECTED")
+    console.log("DB CONNECTED")
 }).catch(() => {
-  console.log("UNABLE to connect to DB")
+    console.log("UNABLE to connect to DB")
 })
 
 // Use parsing middleware
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(cookieParser())
 app.use(cors())
 
@@ -27,12 +30,12 @@ app.use(cors())
 const userRoutes = require("./routes/user")
 
 // Using routes
-app.use('/api', userRoutes) 
+app.use('/api', userRoutes)
 
 
 const port = process.env.PORT || 8000
 
 // Starting a server
 app.listen(port, () => {
-  console.log(`App is running at ${port}`)
+    console.log(`App is running at ${port}`)
 })

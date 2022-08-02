@@ -1,16 +1,10 @@
 const mongoose = require("mongoose")
-const crypto = require("crypto");
-const uuidv1 = require("uuid/v1");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        maxlength: 32,
-        trim: true
-    },
-    lastname: {
-        type: String,
         maxlength: 32,
         trim: true
     },
@@ -23,14 +17,12 @@ const userSchema = new mongoose.Schema({
     encry_password: {
         type: String,
         required: true
-    },
-    salt: String,
+    }
 }, { timestamps: true })
 
 userSchema.virtual("password")
     .set(function (password) {
         this._password = password
-        this.salt = uuidv1()
         this.encry_password = this.securePassword(password)
     })
     .get(function () {
@@ -39,17 +31,22 @@ userSchema.virtual("password")
 
 userSchema.methods = {
     authenticate: function (plainpassword) {
-        return this.securePassword(plainpassword) === this.encry_password
+        return bcrypt.compareSync(plainpassword, this.encry_password)
     },
 
     securePassword: function (plainpassword) {
         if (!plainpassword) return "";
 
-        try {
-            return crypto.createHmac("sha256", this.salt).update(plainpassword).digest("hex")
-        } catch (err) {
-            return ""
-        }
+        return bcrypt.hashSync(plainpassword, 8)
+        // , function (err, hash) {
+        //     if (err || !hash) {
+        //         console.log("Error in hashing")
+        //         return ""
+        //     }
+        //     console.log("hash is: " + hash)
+        //     return hash
+        // });
+
     }
 }
 

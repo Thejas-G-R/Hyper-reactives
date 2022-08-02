@@ -7,9 +7,9 @@ const router = express.Router()
 router.post('/ping', ping)
 
 router.post('/signup', [
-    check("name", "Name must contain a minimum of 3 characters").isLength({ min: 3 }),
-    check("email", "Invalid Email format").isEmail(),
-    check("password", "Password must contain a minimum of 6 characters").isLength({ min: 6 }),
+    check('name', "Name must contain a minimum of 3 characters").isLength({ min: 3 }),
+    check('email', "Invalid Email format").isEmail(),
+    check('password', "Password must contain a minimum of 6 characters").isLength({ min: 6 }),
 ], signup)
 
 router.post('/signin', signin)

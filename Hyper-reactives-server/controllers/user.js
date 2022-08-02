@@ -1,6 +1,5 @@
 const User = require("../models/user")
 const { validationResult } = require('express-validator')
-const user = require("../models/user")
 var jwt = require('jsonwebtoken')
 var expressJwt = require('express-jwt')
 
@@ -14,11 +13,18 @@ exports.signup = (req, res) => {
         })
     }
 
-    const user = new User(req.body)
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    })
+    console.log("calling save")
+
     user.save((err, user) => {
         if (err) {
             return res.status(400).json({
-                error: "Unable to add user"
+                error: "Unable to add user",
+                err: err
             })
         }
 
