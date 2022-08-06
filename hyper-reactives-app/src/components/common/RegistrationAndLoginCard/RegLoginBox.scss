@@ -1,0 +1,9 @@
+@import '../../../styles/variables';
+
+.nameError,
+.emailIdError,
+.passwordError {
+    color: $error_red;
+    font-size: small;
+    margin-left: 10px;
+}
