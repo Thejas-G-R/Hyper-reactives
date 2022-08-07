@@ -2,6 +2,9 @@ import React from 'react';
 import { Grommet } from 'grommet';
 import UserRegistration from './containers/UserRegistration/UserRegistration';
 import UserLogin from './containers/UserLogin/UserLogin';
+import TutorialDataGrid from './components/AdminLandingPage/AdminLandingPage';
+
+
 const theme = {
   global: {
     font: {
@@ -16,7 +19,7 @@ const theme = {
 function App() {
   return (
     <Grommet theme={theme} full>
-      <UserLogin />
+      <TutorialDataGrid />
     </Grommet>
   );
 }
