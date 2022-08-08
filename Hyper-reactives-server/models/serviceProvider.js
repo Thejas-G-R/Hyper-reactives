@@ -1,7 +1,5 @@
 const mongoose = require("mongoose")
 
-mongoose.set('useFindAndModify', false);
-
 const serviceProviderSchema = new mongoose.Schema({
     name: {
         type: String,

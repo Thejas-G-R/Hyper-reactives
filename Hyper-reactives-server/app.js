@@ -18,6 +18,8 @@ mongoose.connect(process.env.DATABASE, {
     console.log("UNABLE to connect to DB")
 })
 
+mongoose.set('useFindAndModify', false);
+
 // Use parsing middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -29,10 +31,12 @@ app.use(cors())
 // Import the routes
 const userRoutes = require("./routes/user")
 const serviceProviderRoutes = require("./routes/serviceProvider")
+const vehicleRoutes = require("./routes/vehicle")
 
 // Using routes
 app.use('/user', userRoutes)
 app.use('/serviceProvider', serviceProviderRoutes)
+app.use('/user/vehicle', vehicleRoutes)
 
 
 const port = process.env.PORT || 8000

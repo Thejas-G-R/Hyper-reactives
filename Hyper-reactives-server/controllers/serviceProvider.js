@@ -49,13 +49,23 @@ exports.getAll = (req, res) => {
             })
         }
 
-        var serviceProvidersMap = {};
+        var serviceProviders = { ServiceProviders: [] };
 
         providers.forEach(function (provider) {
-            serviceProvidersMap[provider._id] = provider;
+            serviceProviders.Data.push({
+                id: provider._id,
+                name: provider.name,
+                phone: provider.phone,
+                street: provider.address.street,
+                city: provider.address.city,
+                state: provider.address.state,
+                zipcode: provider.address.zipcode,
+                rating: provider.rating,
+                description: provider.description,
+            })
         });
 
-        res.send(serviceProvidersMap);
+        res.send(serviceProviders);
     });
 }
 

@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "61da366e-582b-46e8-9ea7-d0cd6a0c52b2",
+		"name": "Hyper Reactives - Vehicles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmU4YWZhYTAzMjlkZmIyM2U2ZDc3ZjEiLCJpYXQiOjE2NTk5MzMxMTV9.XiMqNwLaNQcdLkJ6CzWweBPZPxX98QFcRkv6-P_Kitc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "make",
+							"value": "Honda",
+							"type": "default"
+						},
+						{
+							"key": "model",
+							"value": "Civic",
+							"type": "default"
+						},
+						{
+							"key": "year",
+							"value": "2006",
+							"type": "default"
+						},
+						{
+							"key": "color",
+							"value": "Hot Pink",
+							"type": "default"
+						},
+						{
+							"key": "registrationNumber",
+							"value": "E70338",
+							"type": "default"
+						},
+						{
+							"key": "registrationState",
+							"value": "Massachusetts",
+							"type": "default"
+						},
+						{
+							"key": "VIN",
+							"value": "4S3BMHB68B3286050",
+							"type": "default"
+						},
+						{
+							"key": "insuranceNumber",
+							"value": "8765435675",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/vehicle/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"vehicle",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeStatus",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "updatedStatus",
+							"value": "Approved",
+							"type": "default"
+						},
+						{
+							"key": "vehicleId",
+							"value": "62f091de5b66ec5dd0032897",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/vehicle/changeStatus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"vehicle",
+						"changeStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmU4YWZhYTAzMjlkZmIyM2U2ZDc3ZjEiLCJpYXQiOjE2NTk5MzMxMTV9.XiMqNwLaNQcdLkJ6CzWweBPZPxX98QFcRkv6-P_Kitc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/vehicle/getAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"vehicle",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

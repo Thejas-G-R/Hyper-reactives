@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt");
+const Vehicle = require('./vehicle')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -14,6 +15,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    vehicles: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Vehicle',
+    }],
     encry_password: {
         type: String,
         required: true
