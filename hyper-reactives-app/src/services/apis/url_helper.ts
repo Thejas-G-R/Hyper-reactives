@@ -1,0 +1,1 @@
+export const USER_SIGNUP_API_URL = "/signup"; //create user api url 

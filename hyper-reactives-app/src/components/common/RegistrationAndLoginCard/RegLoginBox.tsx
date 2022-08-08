@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useState } from 'react';
 import { constants } from '../../../utils/constants';
@@ -6,15 +6,25 @@ import { constants } from '../../../utils/constants';
 // import CardContent from '@mui/material/CardContent';
 import './RegLoginBox.scss'
 import { Button, Card, Form } from 'react-bootstrap';
-
+import { connect } from 'react-redux';
+import { userSignup } from '../../../redux/actions/actions';
+const mapStateToProps = (state: any) => {
+    return {
+        signInSuccess: state.userReducer.signInSuccess
+    };
+};
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        callUserSignUp: (data: { name: string, email: string, password: string }) => dispatch(userSignup(data))
+    };
+};
 function RegLoginBox(props: any) {
+
     const [formValue, setFormValue] = useState({ name: "", emailid: "", password: "" })
-    const [isNameError, setIsNameError] = useState(false)
-    const [isEmailError, setIsEmailError] = useState(false)
-    const [isPasswordError, setIsPasswordError] = useState(false)
     const [nameError, setNameError] = useState(" ")
     const [passwordError, setPasswordError] = useState(" ")
     const [emailError, setEmailError] = useState(" ")
+    const [signUpSuccess, setSignUpSuccess] = useState(props.signInSuccess)
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
         const name = e.currentTarget.name;
@@ -23,6 +33,12 @@ function RegLoginBox(props: any) {
             [name]: value,
         });
     }
+
+    useEffect(() => {
+        console.log(props.signInSuccess, "After api")
+    }, [props.signInSuccess]);
+
+
     function validateForm(type: string) {
 
         if (formValue) {
@@ -31,61 +47,40 @@ function RegLoginBox(props: any) {
                     setNameError("Name can't be blank")
                     setPasswordError("")
                     setEmailError("")
-                    setIsNameError(true)
-                    setIsEmailError(false)
-                    setIsPasswordError(false)
                     return false
                 }
                 else if (formValue.name && !new RegExp(constants.USER_REGISTRATION_NAME_REGEX, "u").test(formValue.name)) {
                     setNameError("Name has to be valid")
                     setPasswordError("")
                     setEmailError("")
-                    setIsNameError(true)
-                    setIsEmailError(false)
-                    setIsPasswordError(false)
                     return false
                 }
                 else if (!formValue.emailid) {
                     setNameError("")
                     setPasswordError("")
                     setEmailError("Email id can't be empty")
-                    setIsNameError(false)
-                    setIsEmailError(true)
-                    setIsPasswordError(false)
                     return false
                 }
                 else if (formValue.emailid && !new RegExp(constants.USER_REGISTRATION_EMAIL_REGEX).test(formValue.emailid)) {
                     setNameError("")
                     setPasswordError("")
                     setEmailError("Enter a valid Email id")
-                    setIsNameError(false)
-                    setIsEmailError(true)
-                    setIsPasswordError(false)
                     return false
                 } else if (!formValue.password) {
                     setPasswordError("Password can't be empty")
                     setNameError("")
                     setEmailError("")
-                    setIsNameError(false)
-                    setIsEmailError(false)
-                    setIsPasswordError(true)
                     return false
                 }
                 else if (formValue.password && !new RegExp(constants.USER_REGISTRATION_PASSWORD_REGEX).test(formValue.password)) {
                     setPasswordError("Password must of length greater than 8 and must have atleast 1 number, 1 uppercase, 1 lower case and 1 symbol")
                     setEmailError("")
                     setNameError("")
-                    setIsNameError(false)
-                    setIsEmailError(false)
-                    setIsPasswordError(true)
                     return false
                 }
                 setNameError("")
                 setEmailError("")
                 setPasswordError("")
-                setIsNameError(false)
-                setIsEmailError(false)
-                setIsPasswordError(false)
                 return true
             } else if (type === 'login') {
                 if (!formValue.emailid) {
@@ -126,6 +121,7 @@ function RegLoginBox(props: any) {
                     <Form
                         onSubmit={(e) => {
                             e.preventDefault();
+                            props.callUserSignUp({ name: 'Thejas', email: "thejas@examplemail.com", password: "password" })
                             let isFormValid = validateForm(props.type);
                             if (isFormValid) console.log(formValue + " is valid");
                         }}
@@ -192,4 +188,4 @@ RegLoginBox.propTypes = {
     type: PropTypes.string
 }
 
-export default RegLoginBox
+export default connect(mapStateToProps, mapDispatchToProps)(RegLoginBox)

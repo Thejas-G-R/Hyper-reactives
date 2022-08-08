@@ -7,7 +7,7 @@ import Demo from './components/AdminPage/Admin';
 
 function App() {
   return (
-    <Demo />
+    <UserRegistration />
   );
 }
 
