@@ -1,9 +1,14 @@
 @import '../../../styles/variables';
 
-.nameError,
-.emailIdError,
-.passwordError {
-    color: $error_red;
-    font-size: small;
-    margin-left: 10px;
+
+.registrationHeader {
+    text-align: center;
+    font-size: 32px;
+    margin: 10px 0;
+}
+
+.loginHeader {
+    text-align: center;
+    font-size: 32px;
+    margin: 10px 0;
 }

@@ -1,0 +1,2 @@
+export const USER_SIGN_UP_SUCCESS = "USER_SIGN_UP_SUCCESS"
+export const CALL_SIGN_UP_API = "CALL_SIGN_UP_API"

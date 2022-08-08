@@ -1,14 +1,41 @@
-import React from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { CardHeader, Card, CardFooter, CardBody, Text, FormField, TextInput, Box, Button, Form } from 'grommet';
 import { useState } from 'react';
 import { constants } from '../../../utils/constants';
 import './RegLoginBox.scss'
+import { Button, Card, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { userSignup } from '../../../redux/actions/actions';
+const mapStateToProps = (state: any) => {
+    return {
+        signInSuccess: state.userReducer.signInSuccess
+    };
+};
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        callUserSignUp: (data: { name: string, email: string, password: string }) => dispatch(userSignup(data))
+    };
+};
 function RegLoginBox(props: any) {
+
     const [formValue, setFormValue] = useState({ name: "", emailid: "", password: "" })
-    const [nameError, setNameError] = useState("")
-    const [passwordError, setPasswordError] = useState("")
-    const [emailError, setEmailError] = useState("")
+    const [nameError, setNameError] = useState(" ")
+    const [passwordError, setPasswordError] = useState(" ")
+    const [emailError, setEmailError] = useState(" ")
+    const [signUpSuccess, setSignUpSuccess] = useState(props.signInSuccess)
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.currentTarget.value;
+        const name = e.currentTarget.name;
+        setFormValue({
+            ...formValue,
+            [name]: value,
+        });
+    }
+
+    useEffect(() => {
+        console.log(props.signInSuccess, "After api")
+    }, [props.signInSuccess]);
+
 
     function validateForm(type: string) {
 
@@ -84,76 +111,81 @@ function RegLoginBox(props: any) {
 
         }
     }
+
+
     return (
         props.type === "registration" ?
-            <Card width="medium" background="light-1">
-                <CardHeader pad="medium" justify='center'><Text> {constants.USER_REGISTRATION_HEADING}</Text></CardHeader>
-                <CardBody pad="medium">
+            (<Card className='col-md-4 registrationCard' >
+                <Card.Body >
+                    <Card.Title className='registrationHeader'>{constants.USER_REGISTRATION_HEADING}</Card.Title>
                     <Form
-                        value={formValue}
-                        onChange={nextValue => setFormValue(nextValue)}
-                        onSubmit={({ value }) => {
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            props.callUserSignUp({ name: 'Thejas', email: "thejas@examplemail.com", password: "password" })
                             let isFormValid = validateForm(props.type);
-                            if (isFormValid) console.log(value);
+                            if (isFormValid) console.log(formValue + " is valid");
                         }}
+                        noValidate
                     >
-                        <FormField name="name" htmlFor="name" label={constants.USER_REGISTRATION_NAME_FIELD} required={{ indicator: true }}>
-                            <TextInput id="name" name="name" />
-                        </FormField>
-                        <div>
-                            <Text className='nameError'>{nameError}</Text>
-                        </div>
-                        <FormField name="emailid" htmlFor="emailid" label={constants.USER_REGISTRATION_EMAIL_FIELD} required={{ indicator: true }}>
-                            <TextInput id="emailid" name="emailid" />
-                        </FormField>
-                        <div>
-                            <Text className='emailIdError'>{emailError}</Text>
-                        </div>
-                        <FormField name="password" htmlFor="password" label={constants.USER_REGISTRATION_PASSWORD_FIELD} required={{ indicator: true }}>
-                            <TextInput type={"password"} name="password" />
-                        </FormField>
-                        <div>
-                            <Text className='passwordError'>{passwordError}</Text>
-                        </div>
-                        <Box direction="row" gap="medium">
-                            <Button type="submit" primary label="Submit" />
-                        </Box>
+                        <Form.Group className="mb-3" controlId="name">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Name" onChange={handleInputChange} name="name" />
+                            <Form.Text className="text-danger">
+                                {nameError}
+                            </Form.Text>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="emailid">
+                            <Form.Label>Email Id</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" name="emailid" onChange={handleInputChange} />
+                            <Form.Text className="text-danger">
+                                {emailError}
+                            </Form.Text>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="password">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Enter Password" name="password" onChange={handleInputChange} />
+                            <Form.Text className="text-danger">
+                                {passwordError}
+                            </Form.Text>
+                        </Form.Group>
+                        <Button variant='primary' type='submit'>Submit</Button>
                     </Form>
-                </CardBody>
-            </Card > : props.type === "login" ? <Card width="medium" background="light-1">
-                <CardHeader pad="medium" justify='center'><Text> {constants.USER_LOGIN_HEADING}</Text></CardHeader>
-                <CardBody pad="medium">
-                    <Form
-                        value={formValue}
-                        onChange={nextValue => setFormValue(nextValue)}
-                        onSubmit={({ value }) => {
-                            let isFormValid = validateForm(props.type);
-                            if (isFormValid) console.log(value);
-                        }}
-                    >
-                        <FormField name="emailid" htmlFor="emailid" label={constants.USER_LOGIN_EMAIL_FIELD} required={{ indicator: true }}>
-                            <TextInput id="emailid" name="emailid" />
-                        </FormField>
-                        <div>
-                            <Text className='emailIdError'>{emailError}</Text>
-                        </div>
-                        <FormField name="password" htmlFor="password" label={constants.USER_LOGIN_PASSWORD_FIELD} required={{ indicator: true }}>
-                            <TextInput type={"password"} name="password" />
-                        </FormField>
-                        <div>
-                            <Text className='passwordError'>{passwordError}</Text>
-                        </div>
-                        <Box direction="row" gap="medium">
-                            <Button type="submit" primary label="Submit" />
-                        </Box>
-                    </Form>
-                </CardBody>
-            </Card > : null
-    )
+                </Card.Body>
+            </Card >) : props.type == "login" ?
+                (<Card className='col-sm-5 col-lg-3 loginCard' >
+                    <Card.Body >
+                        <Card.Title className='loginHeader'>{constants.USER_LOGIN_HEADING}</Card.Title>
+                        <Form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                let isFormValid = validateForm(props.type);
+                                if (isFormValid) console.log(formValue + " is valid");
+                            }}
+                            noValidate
+                        >
+                            <Form.Group className="mb-3" controlId="emailid">
+                                <Form.Label>Email Id</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email" name="emailid" onChange={handleInputChange} />
+                                <Form.Text className="text-danger">
+                                    {emailError}
+                                </Form.Text>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="password">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" placeholder="Enter Password" name="password" onChange={handleInputChange} />
+                                <Form.Text className="text-danger">
+                                    {passwordError}
+                                </Form.Text>
+                            </Form.Group>
+                            <Button variant='primary' type='submit'>Submit</Button>
+                        </Form>
+                    </Card.Body>
+                </Card >) : null)
+
 }
 
 RegLoginBox.propTypes = {
     type: PropTypes.string
 }
 
-export default RegLoginBox
+export default connect(mapStateToProps, mapDispatchToProps)(RegLoginBox)
