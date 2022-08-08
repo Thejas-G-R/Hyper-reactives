@@ -1,6 +1,6 @@
 export const constants = {
     //key in capitals:value
-    USER_REGISTRATION_HEADING: "User Registration",
+    USER_REGISTRATION_HEADING: "Sign up",
     USER_REGISTRATION_NAME_FIELD: "Name",
     USER_REGISTRATION_NAME_REGEX: "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
     USER_REGISTRATION_EMAIL_FIELD: "Email id",

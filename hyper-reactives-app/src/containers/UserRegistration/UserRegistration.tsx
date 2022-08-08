@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box } from 'grommet';
+import { Container } from 'react-bootstrap';
 import RegLoginBox from '../../components/common/RegistrationAndLoginCard/RegLoginBox';
-
+import './UserRegistration.scss';
 function UserRegistration() {
     return (
-        <Box direction='row' justify='center' align='center' fill >
+        <Container fluid className='cardContainer'>
             <RegLoginBox type="registration"></RegLoginBox>
-        </Box >
+        </Container>
     )
 }
 
