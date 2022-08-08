@@ -28,9 +28,11 @@ app.use(cors())
 
 // Import the routes
 const userRoutes = require("./routes/user")
+const serviceProviderRoutes = require("./routes/serviceProvider")
 
 // Using routes
-app.use('/api', userRoutes)
+app.use('/user', userRoutes)
+app.use('/serviceProvider', serviceProviderRoutes)
 
 
 const port = process.env.PORT || 8000

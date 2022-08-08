@@ -1,5 +1,6 @@
 const express = require("express")
 const { signup, signin, signout } = require("../controllers/user")
+const { authenticate } = require('../middleware/authenticator')
 const { check } = require('express-validator')
 const { ping } = require("../controllers/ping")
 const router = express.Router()
@@ -14,6 +15,6 @@ router.post('/signup', [
 
 router.post('/signin', signin)
 
-router.get("/signout", signout)
+router.get("/signout", authenticate, signout)
 
-module.exports = router
+module.exports = router 

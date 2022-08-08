@@ -36,17 +36,7 @@ userSchema.methods = {
 
     securePassword: function (plainpassword) {
         if (!plainpassword) return "";
-
         return bcrypt.hashSync(plainpassword, 8)
-        // , function (err, hash) {
-        //     if (err || !hash) {
-        //         console.log("Error in hashing")
-        //         return ""
-        //     }
-        //     console.log("hash is: " + hash)
-        //     return hash
-        // });
-
     }
 }
 
