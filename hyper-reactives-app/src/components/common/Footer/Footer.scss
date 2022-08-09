@@ -1,0 +1,27 @@
+@import "../../../styles/colors";
+
+.footer {
+    background-color: $footer_black;
+    color: $white;
+    width: 100%;
+    min-width: 100%;
+    font-weight: 400;
+    position: absolute;
+    bottom: 0;
+}
+
+.innerContent {
+    display: flex;
+    margin-top: 12px;
+    padding-top: 12px;
+}
+
+.disclaimer {
+    padding-top: 12px;
+    flex: 3 0;
+}
+
+.icons {
+    flex: 2 0;
+    justify-content: space-around;
+}

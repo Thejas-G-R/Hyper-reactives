@@ -41,7 +41,7 @@ function RegLoginBox(props: any) {
     }, [navigate, props.signUpSuccess]);
     useEffect(() => {
         if (props.signInSuccess === true)
-            navigate("/Home")
+            navigate("/Layout")
     }, [navigate, props.signInSuccess]);
 
 

@@ -1,4 +1,4 @@
-import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS } from "../types/actionTypes";
+import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS, USER_GET_CARS_SUCCESS } from "../types/actionTypes";
 
 var initialState = {
     signInSuccess: false,
@@ -19,6 +19,14 @@ export const userReducer = (state = initialState, action: { type: string, data: 
             if (action.data && action.data.token.length > 0) {
                 return { ...state, authToken: token, name: name, emailId: email, signInSuccess: true }
             }
+            return state
+
+        case USER_GET_CARS_SUCCESS:
+            const vehicles = action.data.vehicles
+            if (vehicles.length > 0)
+                return { ...state, vehicles: [...vehicles], ownVehicles: true }
+            else if (vehicles.length === 0)
+                return { ...state, vehicles: [...vehicles], ownVehicles: false }
             return state
         default:
             return state

@@ -8,6 +8,8 @@ import AdminPage from './components/AdminPage/Admin';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Dashboard from './containers/Dashboard/Dashboard';
 import VehicleApproval from './components/AdminPage/vehicle-approval';
+import BasicLayout from './containers/BasicLayout/BasicLayout';
+import RegisterVehicle from './containers/RegisterVehicle/RegisterVehicle';
 
 function App() {
   return (
@@ -19,7 +21,13 @@ function App() {
         <Route path="/Admin" element={<AdminPage />}></Route>
         <Route path="/Home" element={<Dashboard />}></Route>
         <Route path="/vehicle-approval" element={<VehicleApproval />}></Route>
-        
+
+        <Route path="/Layout" element={<BasicLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path='RegisterVehicle' element={<RegisterVehicle />} />
+        </Route>
+
+
         {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes >
     </Router >
