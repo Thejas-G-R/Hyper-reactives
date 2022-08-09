@@ -5,7 +5,9 @@ exports.add = (req, res) => {
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
-        return res.status(400).json({
+        return res.status(200).json({
+            code: 1,
+            message: 'Validation error',
             error: errors.array()[0].msg
         })
     }
@@ -27,13 +29,15 @@ exports.add = (req, res) => {
 
     serviceProvider.save((err, user) => {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to add service provider",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to add service provider",
                 err: err
             })
         }
 
-        return res.json({
+        return res.status(200).json({
+            code: 0,
             message: "Success",
             serviceProvider
         })
@@ -43,8 +47,9 @@ exports.add = (req, res) => {
 exports.getAll = (req, res) => {
     ServiceProvider.find({}, function (err, providers) {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to get service providers",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to get service providers",
                 err: err
             })
         }
@@ -65,7 +70,11 @@ exports.getAll = (req, res) => {
             })
         });
 
-        res.send(serviceProviders);
+        res.status(200).json({
+            code: 0,
+            message: success,
+            serviceProviders
+        })
     });
 }
 
@@ -88,13 +97,18 @@ exports.edit = (req, res) => {
 
     ServiceProvider.findOneAndUpdate({ _id: req.body.id }, NewServiceProvider, { new: true }, (err, provider) => {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to update service providers",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to update service providers",
                 err: err
             })
         }
 
-        return res.send(provider);
+        res.status(200).json({
+            code: 0,
+            message: success,
+            provider
+        })
     })
 
 }

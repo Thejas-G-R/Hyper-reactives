@@ -16,8 +16,9 @@ exports.approveReceipt = (req, res) => {
 
     service.save((err, service) => {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to add service",
+            return res.status(200).json({
+                code: 1, 
+                message: "Unable to add service",
                 err: err
             })
         }
@@ -25,13 +26,15 @@ exports.approveReceipt = (req, res) => {
 
         Vehicle.findOneAndUpdate({ _id: req.body.vehicleId }, { $push: { serviceHistory: service._id } }, { new: true }, (err, vehicle) => {
             if (err) {
-                return res.status(400).json({
-                    error: "Unable to add service to vehicle",
+                return res.status(200).json({
+                    code: 1, 
+                    message: "Unable to add service to vehicle",
                     err: err
                 })
             }
     
             return res.json({
+                code: 0,
                 message: "Success",
                 service
             })
@@ -50,16 +53,18 @@ function getReceipt(body, res) {
 
     Vehicle.findOne({ _id: body.vehicleId }, (err, vehicle) => {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to get vehicle",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to get vehicle",
                 err: err
             })
         }
 
         ServiceProvider.findOne({ _id: body.serviceProviderId }, (err, serviceProvider) => {
             if (err) {
-                return res.status(400).json({
-                    error: "Unable to get serviceProvider",
+                return res.status(200).json({
+                    code: 1,
+                    message: "Unable to get serviceProvider",
                     err: err
                 })
             }

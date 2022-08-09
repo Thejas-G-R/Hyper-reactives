@@ -17,13 +17,15 @@ exports.add = (req, res) => {
 
     vehicle.save((err, user) => {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to add vehicle",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to add vehicle",
                 err: err
             })
         }
 
-        return res.json({
+        return res.status(200).json({
+            code: 0,
             message: "Success",
             vehicle
         })
@@ -36,13 +38,15 @@ exports.changeStatus = (req, res) => {
 
     Vehicle.findOneAndUpdate({ _id: req.body.vehicleId }, { status: req.body.updatedStatus }, { new: true }, (err, vehicle) => {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to update status of vehicle",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to update status of vehicle",
                 err: err
             })
         }
 
-        return res.json({
+        return res.status(200).json({
+            code: 0,
             message: "Success",
             vehicle
         })
@@ -54,8 +58,9 @@ exports.getAllVehicles = (req, res) => {
 
     Vehicle.find({}, function (err, vehicles) {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to get vehicles",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to get vehicles",
                 err: err
             })
         }
@@ -79,7 +84,12 @@ exports.getAllVehicles = (req, res) => {
                 })
         });
 
-        res.send(result);
+        res.status(200).json({
+            code: 0,
+            message: 'Success',
+            result
+        })
+
     });
 
 }
@@ -89,8 +99,9 @@ exports.getAllVehiclesAdmin = (req, res) => {
 
     Vehicle.find({}, function (err, vehicles) {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to get vehicles",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to get vehicles",
                 err: err
             })
         }
@@ -113,7 +124,12 @@ exports.getAllVehiclesAdmin = (req, res) => {
             })
         });
 
-        res.send(result);
+        res.status(200).json({
+            code: 0,
+            message: 'Success',
+            result
+        })
+
     });
 
 }

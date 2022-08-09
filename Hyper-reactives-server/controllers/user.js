@@ -6,7 +6,9 @@ exports.signup = (req, res) => {
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
-        return res.status(400).json({
+        return res.status(200).json({
+            code: 1,
+            message: 'Validation error',
             error: errors.array()[0].msg
         })
     }
@@ -20,13 +22,15 @@ exports.signup = (req, res) => {
 
     user.save((err, user) => {
         if (err) {
-            return res.status(400).json({
-                error: "Unable to add user",
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to add user",
                 err: err
             })
         }
 
         return res.status(200).json({
+            code: 0,
             message: "Success",
             user
         })
@@ -39,15 +43,17 @@ exports.signin = (req, res) => {
 
     User.findOne({ email }, (err, user) => {
         if (err || !user) {
-            return res.status(400).json({
-                error: "Email was not found"
+            return res.status(200).json({
+                code: 1,
+                message: "Email was not found"
             })
         }
 
         // Authenticate user
         if (!user.authenticate(password)) {
-            return res.status(400).json({
-                error: "Email and password do not match"
+            return res.status(200).json({
+                code: 1,
+                message: "Email and password do not match"
             })
         }
 
@@ -60,6 +66,8 @@ exports.signin = (req, res) => {
         // Send response
         const { _id, name, email } = user
         return res.status(200).json({
+            code: 0,
+            message: success,
             token,
             user: {
                 _id,
@@ -74,6 +82,7 @@ exports.signin = (req, res) => {
 exports.signout = (req, res) => {
     res.clearCookie("token")
     return res.status(200).json({
+        code: 0,
         message: "User siginout successful"
     })
 }
