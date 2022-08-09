@@ -1,0 +1,23 @@
+.imageCardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5%;
+}
+
+.avatarImage {
+    width: 10%;
+    margin-right: 10%;
+}
+
+.cardText {
+    width: 80%;
+    overflow-wrap: break-word;
+
+}
+
+.onlyText {
+    width: 100%;
+    overflow-wrap: break-word;
+}

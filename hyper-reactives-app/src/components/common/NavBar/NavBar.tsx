@@ -10,7 +10,7 @@ export const NavBar = (props: any) => {
         <>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
                 <Container fluid>
-                    <Navbar.Brand onClick={() => navigate("/Home")}>Navbar</Navbar.Brand>
+                    <Navbar.Brand onClick={() => navigate("/home")}>Navbar</Navbar.Brand>
                     <Nav className="justify-content-center flex-grow-1 pe-3">
                         <div className='navHeading'>{pageName}</div>
                     </Nav>

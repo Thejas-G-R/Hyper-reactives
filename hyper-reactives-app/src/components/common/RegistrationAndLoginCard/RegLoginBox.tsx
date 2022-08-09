@@ -37,11 +37,11 @@ function RegLoginBox(props: any) {
 
     useEffect(() => {
         if (props.signUpSuccess === true)
-            navigate("/Login")
+            navigate("/login")
     }, [navigate, props.signUpSuccess]);
     useEffect(() => {
         if (props.signInSuccess === true)
-            navigate("/Layout")
+            navigate("/layout")
     }, [navigate, props.signInSuccess]);
 
 
@@ -157,7 +157,7 @@ function RegLoginBox(props: any) {
                         </Form.Group>
                         <div className='buttons'>
                             <Button variant='primary' type='submit' className='col-md-5'>Submit</Button>
-                            <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/Login")}>Login?</Button>
+                            <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/login")}>Login?</Button>
                         </div>
                     </Form>
                 </Card.Body>
@@ -189,7 +189,7 @@ function RegLoginBox(props: any) {
                             </Form.Group>
                             <div className='buttons'>
                                 <Button variant='primary' type='submit' className='col-md-5'>Submit</Button>
-                                <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/Signup")}>Sign up?</Button>
+                                <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/signup")}>Sign up?</Button>
                             </div>
                         </Form>
                     </Card.Body>

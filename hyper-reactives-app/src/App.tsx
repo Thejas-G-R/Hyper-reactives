@@ -15,16 +15,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/Signup" />} />
-        <Route path="/Signup" element={<UserRegistration />}></Route>
-        <Route path="/Login" element={<UserLogin />}></Route>
-        <Route path="/Admin" element={<AdminPage />}></Route>
-        <Route path="/Home" element={<Dashboard />}></Route>
-        <Route path="/vehicle-approval" element={<VehicleApproval />}></Route>
+        <Route path="/" element={<Navigate replace to="signup" />} />
+        <Route path="signup" element={<UserRegistration />}></Route>
+        <Route path="login" element={<UserLogin />}></Route>
+        <Route path="admin" element={<AdminPage />}></Route>
+        <Route path="home" element={<Dashboard />}></Route>
+        <Route path="vehicle-approval" element={<VehicleApproval />}></Route>
 
-        <Route path="/Layout" element={<BasicLayout />}>
+        <Route path="Layout" element={<BasicLayout />}>
           <Route index element={<Dashboard />} />
-          <Route path='RegisterVehicle' element={<RegisterVehicle />} />
+          <Route path='register-vehicle' element={<RegisterVehicle />} />
         </Route>
 
 

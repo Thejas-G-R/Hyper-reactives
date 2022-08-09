@@ -1,0 +1,14 @@
+.grid {
+    min-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.grid>div {
+    flex-basis: calc(25% - 40px)
+}
+
+.vehicleCard {
+    margin: 20px 0;
+}

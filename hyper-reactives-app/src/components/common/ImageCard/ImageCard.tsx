@@ -3,20 +3,21 @@ import React from 'react'
 import { Button, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
+import './ImageCard.scss'
 export const ImageCard = (props: any) => {
     const navigate = useNavigate()
     return (
         props.showAvatar && !props.showAddButton ?
-            (<div>
+            (<div className='imageCardContainer'>
                 <div className="avatarImage">
-                    <Image src='' fluid rounded alt='' />
+                    <Image src='https://picsum.photos/55/55' fluid rounded alt='' />
                 </div>
-                <div className="cardText">akjsndkjnasdjna</div>
-            </div>) : !props.showAvatar && props.showAddButton ? (<div>
-                <div className="onlyText">akjsndkjnasdjna</div>
-                <Button variant='primary' type='button' onClick={() => navigate("/RegisterVehicle")}>Manage cars</Button>
-            </div>) : null
+                <div className="cardText">akjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjna</div>
+            </div>) : !props.showAvatar && props.showAddButton ?
+                (<div className='imageCardContainer'>
+                    <div className="onlyText">akjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjnaakjsndkjnasdjna</div>
+                    <Button variant='primary' type='button' onClick={() => navigate("register-vehicle")}>Manage cars</Button>
+                </div>) : null
 
     )
 }

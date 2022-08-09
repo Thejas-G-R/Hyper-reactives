@@ -28,14 +28,14 @@ export const Dashboard = (props: any) => {
     }, [props.vehicles, props.ownVehicles])
 
     return (
-        <>
+        <div className='content'>
             <ImageCard showAvatar={true} showAddButton={false} />
             <div className="dashboradImage">
                 <Image fluid src='' alt='' />
             </div>
             <ImageCard showAvatar={false} showAddButton={true} />
             <CardGrid empty={ownVehicles} vehicles={vehicles} />
-        </>
+        </div>
     )
 }
 
