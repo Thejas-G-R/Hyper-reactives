@@ -2,20 +2,21 @@ import React, { ChangeEvent, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useState } from 'react';
 import { constants } from '../../../utils/constants';
-// import { Button, Card, CardHeader, Grid, TextField, Typography } from '@mui/material';
-// import CardContent from '@mui/material/CardContent';
 import './RegLoginBox.scss'
 import { Button, Card, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { userSignup } from '../../../redux/actions/actions';
+import { userLogin, userSignup } from '../../../redux/actions/actions';
+import { useNavigate } from 'react-router-dom';
 const mapStateToProps = (state: any) => {
     return {
-        signInSuccess: state.userReducer.signInSuccess
+        signInSuccess: state.userReducer.signInSuccess,
+        signUpSuccess: state.userReducer.signUpSuccess,
     };
 };
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        callUserSignUp: (data: { name: string, email: string, password: string }) => dispatch(userSignup(data))
+        callUserSignUp: (data: { name: string, email: string, password: string }) => dispatch(userSignup(data)),
+        callLoginAPI: (data: { email: string, password: string }) => dispatch(userLogin(data))
     };
 };
 function RegLoginBox(props: any) {
@@ -24,7 +25,7 @@ function RegLoginBox(props: any) {
     const [nameError, setNameError] = useState(" ")
     const [passwordError, setPasswordError] = useState(" ")
     const [emailError, setEmailError] = useState(" ")
-    const [signUpSuccess, setSignUpSuccess] = useState(props.signInSuccess)
+    const navigate = useNavigate()
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
         const name = e.currentTarget.name;
@@ -35,8 +36,13 @@ function RegLoginBox(props: any) {
     }
 
     useEffect(() => {
-        console.log(props.signInSuccess, "After api")
-    }, [props.signInSuccess]);
+        if (props.signUpSuccess === true)
+            navigate("/Login")
+    }, [navigate, props.signUpSuccess]);
+    useEffect(() => {
+        if (props.signInSuccess === true)
+            navigate("/Home")
+    }, [navigate, props.signInSuccess]);
 
 
     function validateForm(type: string) {
@@ -121,9 +127,10 @@ function RegLoginBox(props: any) {
                     <Form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            props.callUserSignUp({ name: 'Thejas', email: "thejas@examplemail.com", password: "password" })
+
                             let isFormValid = validateForm(props.type);
-                            if (isFormValid) console.log(formValue + " is valid");
+                            if (isFormValid)
+                                props.callUserSignUp({ name: formValue.name, email: formValue.emailid, password: formValue.password })
                         }}
                         noValidate
                     >
@@ -148,7 +155,10 @@ function RegLoginBox(props: any) {
                                 {passwordError}
                             </Form.Text>
                         </Form.Group>
-                        <Button variant='primary' type='submit'>Submit</Button>
+                        <div className='buttons'>
+                            <Button variant='primary' type='submit' className='col-md-5'>Submit</Button>
+                            <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/Login")}>Login?</Button>
+                        </div>
                     </Form>
                 </Card.Body>
             </Card >) : props.type == "login" ?
@@ -159,7 +169,7 @@ function RegLoginBox(props: any) {
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 let isFormValid = validateForm(props.type);
-                                if (isFormValid) console.log(formValue + " is valid");
+                                if (isFormValid) props.callLoginAPI({ email: formValue.emailid, password: formValue.password })
                             }}
                             noValidate
                         >
@@ -177,7 +187,10 @@ function RegLoginBox(props: any) {
                                     {passwordError}
                                 </Form.Text>
                             </Form.Group>
-                            <Button variant='primary' type='submit'>Submit</Button>
+                            <div className='buttons'>
+                                <Button variant='primary' type='submit' className='col-md-5'>Submit</Button>
+                                <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/Signup")}>Sign up?</Button>
+                            </div>
                         </Form>
                     </Card.Body>
                 </Card >) : null)

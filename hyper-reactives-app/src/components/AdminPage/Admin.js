@@ -262,7 +262,7 @@ function Demo() {
               data={data}
               icons={tableIcons}
               editable={{
-                isDeleteHidden: rowData => rowData.name === 'y',
+                
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve) => {
                       handleRowUpdate(newData, oldData, resolve);
