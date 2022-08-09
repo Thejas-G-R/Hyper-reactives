@@ -44,7 +44,7 @@ const tableIcons = {
 };
 
 const api = axios.create({
-  baseURL: `http://localhost:8000/serviceProvider`
+  baseURL: `http://localhost:8000/`
   // baseURL: `https://reqres.in/api`
 })
 
@@ -85,7 +85,7 @@ function Demo() {
 
   useEffect(() => { 
     // api.get("/getAll?authorization=")
-    api.get("/getAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0`} })    
+    api.get("serviceProvider/getAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0`} })    
     .then(res => {               
             console.log(res.data.ServiceProviders)
             setData(res.data.ServiceProviders)
@@ -134,7 +134,7 @@ function Demo() {
   };
 
     if(errorList.length < 1){
-      api.post("/edit", newData, requestOptions)
+      api.post("serviceProvider/edit", newData, requestOptions)
       .then(res => {
         console.log(res)
         const dataUpdate = [...data];
@@ -199,7 +199,7 @@ function Demo() {
   };
 
     if(errorList.length < 1){ //no error
-          api.post("/add",newData ,requestOptions)
+          api.post("serviceProvider/add",newData ,requestOptions)
       .then(res => {
         let dataToAdd = [...data];
         dataToAdd.push(newData);
@@ -222,22 +222,22 @@ function Demo() {
     
   }
 
-  const handleRowDelete = (oldData, resolve) => {
+  // const handleRowDelete = (oldData, resolve) => {
     
-    api.delete("/users/"+oldData.id)
-      .then(res => {
-        const dataDelete = [...data];
-        const index = oldData.tableData.id;
-        dataDelete.splice(index, 1);
-        setData([...dataDelete]);
-        resolve()
-      })
-      .catch(error => {
-        setErrorMessages(["Delete failed! Server error"])
-        setIserror(true)
-        resolve()
-      })
-  }
+  //   api.delete("/users/"+oldData.id)
+  //     .then(res => {
+  //       const dataDelete = [...data];
+  //       const index = oldData.tableData.id;
+  //       dataDelete.splice(index, 1);
+  //       setData([...dataDelete]);
+  //       resolve()
+  //     })
+  //     .catch(error => {
+  //       setErrorMessages(["Delete failed! Server error"])
+  //       setIserror(true)
+  //       resolve()
+  //     })
+  // }
 
 
   return (
@@ -262,6 +262,7 @@ function Demo() {
               data={data}
               icons={tableIcons}
               editable={{
+                isDeleteHidden: (newData) => newData.rating> 0 ,
                 
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve) => {
@@ -272,10 +273,10 @@ function Demo() {
                   new Promise((resolve) => {
                     handleRowAdd(newData, resolve)
                   }),
-                onRowDelete: (oldData) =>
-                  new Promise((resolve) => {
-                    handleRowDelete(oldData, resolve)
-                  }),
+                // onRowDelete: (oldData) =>
+                //   new Promise((resolve) => {
+                //     handleRowDelete(oldData, resolve)
+                //   }),
               }}
           
               options={{
@@ -286,11 +287,7 @@ function Demo() {
           <Grid item xs={3}></Grid>
         </Grid>
 
-        <div>
-         <h1>
-           Vehicle Details</h1> 
         </div>
-    </div>
   );
 }
 

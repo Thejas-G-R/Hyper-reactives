@@ -7,6 +7,7 @@ import Demo from '../src/components/AdminPage/Admin';
 import AdminPage from './components/AdminPage/Admin';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Dashboard from './containers/Dashboard/Dashboard';
+import VehicleApproval from './components/AdminPage/vehicle-approval';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Login" element={<UserLogin />}></Route>
         <Route path="/Admin" element={<AdminPage />}></Route>
         <Route path="/Home" element={<Dashboard />}></Route>
+        <Route path="/vehicle-approval" element={<VehicleApproval />}></Route>
         
         {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes >
