@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_CARS_API_URL, USER_SIGNIN_API_URL, USER_SIGNUP_API_URL } from "./url_helper";
+import { USER_CARS_API_URL, USER_CAR_SERVICE_HISTORY_URL, USER_SIGNIN_API_URL, USER_SIGNUP_API_URL } from "./url_helper";
 
 //apply base url for axios
 const REACT_APP_APP_URL = "http://localhost:8000/user";
@@ -17,7 +17,6 @@ export async function userSignupAPI(data: { name: string, email: string, passwor
                 "Content-Type": "application/json",
             }
         })
-        .then((response) => response.data);
 }
 
 export async function userSigninAPI(data: { email: string, password: string }) {
@@ -28,7 +27,6 @@ export async function userSigninAPI(data: { email: string, password: string }) {
                 "Content-Type": "application/json",
             }
         })
-        .then((response) => response.data);
 }
 
 
@@ -41,5 +39,15 @@ export async function getUserCarsAPICall(data: { authToken: string }) {
                 "authorization": "Bearer " + data.authToken
             }
         })
-        .then((response) => response.data);
+}
+
+export async function getUserCarServiceHistoryAPICall(data: { authToken: string, vehicleId: String }) {
+    const url = USER_CAR_SERVICE_HISTORY_URL
+    return await userApi
+        .post(url, { vehicleId: data.vehicleId }, {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": "Bearer " + data.authToken
+            }
+        })
 }

@@ -10,6 +10,7 @@ import Dashboard from './containers/Dashboard/Dashboard';
 import VehicleApproval from './components/AdminPage/vehicle-approval';
 import BasicLayout from './containers/BasicLayout/BasicLayout';
 import RegisterVehicle from './containers/RegisterVehicle/RegisterVehicle';
+import VehicleHistory from './containers/VehicleHistory/VehicleHistory';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="Layout" element={<BasicLayout />}>
           <Route index element={<Dashboard />} />
           <Route path='register-vehicle' element={<RegisterVehicle />} />
+          <Route path='vehicle-history' element={<VehicleHistory />} />
         </Route>
 
 

@@ -1,0 +1,43 @@
+.cardInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.firstHalf,
+.secondHalf {
+    width: 45%;
+}
+
+.vehicleDetails {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.vechileActionsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.serviceYourVehicle,
+.printServiceHistoryContainer {
+    width: 45%;
+}
+
+.buttonContainer {
+    margin-top: 10px;
+}
+
+.timeLineText {
+    background-color: rgb(246, 246, 246);
+    text-align: center;
+    height: 50px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}

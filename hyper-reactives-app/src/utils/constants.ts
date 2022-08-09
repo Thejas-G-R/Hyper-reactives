@@ -13,8 +13,10 @@ export const constants = {
     USER_LOGIN_PASSWORD_FIELD: "Password",
     USER_LOGIN_PASSWORD_REGEX: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$",
     FOOTER_DISCLAIMER_TEXT: "CARFAX Vehicle History products and services are based only on information supplied to CARFAX. CARFAX does not have the complete history of every vehicle. Use the CARFAX search as one important tool, along with a vehicle inspection and test drive, to make a better decision about your next used car.",
+    GET_SERVICING_DONE_TEXT: "Get your vehicle serviced by the best service providers near you!",
+    PRINT_SERVICING_HISTORY: "Print your vehicle service history",
     ADMIN_EDIT_FIELD_PHONE: "^(1-)?\\d{3}-\\d{3}-\\d{4}$",
     ADMIN_EDIT_FIELD_ZIPCODE: "^[0-9]{5}(?:-[0-9]{4})?$",
     ADMIN_EDIT_FIELD_RATING: "[+]?([0-4]*\\.[0-9]+|[0-5])",
-    COMPANY_NAME: "AutoMate"
+    COMPANY_NAME: "AutoMate",
 }
