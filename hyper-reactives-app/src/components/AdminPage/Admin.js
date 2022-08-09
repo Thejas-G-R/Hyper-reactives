@@ -84,13 +84,13 @@ function Demo() {
   const [errorMessages, setErrorMessages] = useState([])
 
   useEffect(() => { 
-    api.get("/getAll?authorization=")
-    api.get("/getAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo`, "Access-Control-Allow-Origin" : "http://localhost:3000" } })    
+    // api.get("/getAll?authorization=")
+    api.get("/getAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0`} })    
     .then(res => {               
-            console.log(res.data.data)
-            // setData(res.data.data)
-            setData(
-              [{id:1, name:"Pramod",phone: "8979897", street: "oiy oy", state: "sads", zipcode: "8798", rating : "3.4", email: "sad@mail.com", description : "car service"}])
+            console.log(res.data.ServiceProviders)
+            setData(res.data.ServiceProviders)
+            // setData(
+            //   [{id:1, name:"Pramod",phone: "8979897", street: "oiy oy", state: "sads", zipcode: "8798", rating : "3.4", email: "sad@mail.com", description : "car service"}])
          })
          .catch(error=>{
              console.log("Error")
@@ -104,7 +104,7 @@ function Demo() {
       errorList.push("Please enter last name")
     }
     
-    if(newData.phone === undefined || ValidatePhone(newData.phone) === false){
+    if(newData.phone === undefined){
       errorList.push("Please enter a valid phone")
     }
     if(newData.street === undefined){
@@ -129,12 +129,12 @@ function Demo() {
 
     const requestOptions = {
       // method: 'POST',
-      headers: { "authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo` },
+      headers: { "authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0` },
       
   };
 
     if(errorList.length < 1){
-      api.patch("/edit", newData, requestOptions)
+      api.post("/edit", newData, requestOptions)
       .then(res => {
         console.log(res)
         const dataUpdate = [...data];
@@ -194,7 +194,7 @@ function Demo() {
     }
     const requestOptions = {
       // method: 'POST',
-      headers: { "authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo` },
+      headers: { "authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0` },
       
   };
 
@@ -262,6 +262,7 @@ function Demo() {
               data={data}
               icons={tableIcons}
               editable={{
+                isDeleteHidden: rowData => rowData.name === 'y',
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve) => {
                       handleRowUpdate(newData, oldData, resolve);
@@ -275,6 +276,10 @@ function Demo() {
                   new Promise((resolve) => {
                     handleRowDelete(oldData, resolve)
                   }),
+              }}
+          
+              options={{
+                exportButton: true,exportAllData: true, exportFileName: "TableData"
               }}
             />
           </Grid>

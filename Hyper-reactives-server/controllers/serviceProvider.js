@@ -52,7 +52,7 @@ exports.getAll = (req, res) => {
         var serviceProviders = { ServiceProviders: [] };
 
         providers.forEach(function (provider) {
-            serviceProviders.Data.push({
+            serviceProviders.ServiceProviders.push({
                 id: provider._id,
                 name: provider.name,
                 phone: provider.phone,
