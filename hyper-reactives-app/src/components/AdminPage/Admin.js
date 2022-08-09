@@ -86,11 +86,13 @@ function Demo() {
   useEffect(() => { 
     // api.get("/getAll?authorization=")
     api.get("serviceProvider/getAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0`} })    
-    .then(res => {               
-            console.log(res.data.ServiceProviders)
-            setData(res.data.ServiceProviders)
-            // setData(
-            //   [{id:1, name:"Pramod",phone: "8979897", street: "oiy oy", state: "sads", zipcode: "8798", rating : "3.4", email: "sad@mail.com", description : "car service"}])
+    .then(res => {      
+            console.log(res)
+            console.log(res.data.code)
+            if(res.data.code === 0){         
+              console.log(res.data.serviceProviders.ServiceProviders)
+              setData(res.data.serviceProviders.ServiceProviders)
+            }
          })
          .catch(error=>{
              console.log("Error")

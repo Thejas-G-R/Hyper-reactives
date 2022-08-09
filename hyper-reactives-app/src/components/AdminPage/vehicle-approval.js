@@ -74,10 +74,13 @@ function VehicleApproval() {
   useEffect(() => { 
     // api.get("/getAll?authorization=")
     api.get("/getAdminAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0`} })    
-    .then(res => {               
-            console.log(res.data.vehicles)
-            setData(res.data.vehicles)
-           
+    .then(res => {  
+            console.log(res) 
+            console.log(res.data.code )
+            if (res.data.code === 0){            
+                console.log(res.data.result.vehicles)
+                setData(res.data.result.vehicles)
+            }
          })
          .catch(error=>{
              console.log("Error")
