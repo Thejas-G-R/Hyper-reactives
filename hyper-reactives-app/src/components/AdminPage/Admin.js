@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import './App.css';
 import { forwardRef } from 'react';
-// import Avatar from 'react-avatar';
 import Grid from '@material-ui/core/Grid'
 
 import MaterialTable from "material-table";
@@ -49,33 +47,33 @@ const api = axios.create({
 })
 
 
-function ValidatePhone(phone){
+function ValidatePhone(phone) {
   const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
   return re.test(phone);
 }
 
-function ValidateZipCode(zipcode){
+function ValidateZipCode(zipcode) {
   const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
   return re.test(zipcode);
 }
 
-function ValidateRating(rating){
+function ValidateRating(rating) {
   const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
   return re.test(rating);
 }
 
-function Demo() {
+function AdminPage() {
 
   var columns = [
-    {title: "id", field: "id", hidden: true},
-    {title: "Name", field: "name"},
-    {title: "Phone", field: "phone"},
-    {title: "Street", field: "street"},
-    {title: "State", field: "state"},
-    {title: "Zipcode", field: "zipcode"},
-    {title: "Rating", field: "rating"},
-    {title: "city", field: "city"},
-    {title: "Description", field: "description"}
+    { title: "id", field: "id", hidden: true },
+    { title: "Name", field: "name" },
+    { title: "Phone", field: "phone" },
+    { title: "Street", field: "street" },
+    { title: "State", field: "state" },
+    { title: "Zipcode", field: "zipcode" },
+    { title: "Rating", field: "rating" },
+    { title: "city", field: "city" },
+    { title: "Description", field: "description" }
   ]
   const [data, setData] = useState([]); //table data
 
@@ -83,148 +81,148 @@ function Demo() {
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
 
-  useEffect(() => { 
+  useEffect(() => {
     api.get("/getAll?authorization=")
-    api.get("/getAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo`, "Access-Control-Allow-Origin" : "http://localhost:3000" } })    
-    .then(res => {               
-            console.log(res.data.data)
-            // setData(res.data.data)
-            setData(
-              [{id:1, name:"Pramod",phone: "8979897", street: "oiy oy", state: "sads", zipcode: "8798", rating : "3.4", email: "sad@mail.com", description : "car service"}])
-         })
-         .catch(error=>{
-             console.log("Error")
-         })
+    api.get("/getAll", { headers: { "authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo`, "Access-Control-Allow-Origin": "http://localhost:3000" } })
+      .then(res => {
+        console.log(res.data.data)
+        // setData(res.data.data)
+        setData(
+          [{ id: 1, name: "Pramod", phone: "8979897", street: "oiy oy", state: "sads", zipcode: "8798", rating: "3.4", email: "sad@mail.com", description: "car service" }])
+      })
+      .catch(error => {
+        console.log("Error")
+      })
   }, [])
 
   const handleRowUpdate = (newData, oldData, resolve) => {
     //validation
     let errorList = []
-    if(newData.name === undefined){
+    if (newData.name === undefined) {
       errorList.push("Please enter last name")
     }
-    
-    if(newData.phone === undefined || ValidatePhone(newData.phone) === false){
+
+    if (newData.phone === undefined || ValidatePhone(newData.phone) === false) {
       errorList.push("Please enter a valid phone")
     }
-    if(newData.street === undefined){
+    if (newData.street === undefined) {
       errorList.push("Please enter a valid street address")
     }
-    if(newData.state === undefined){
+    if (newData.state === undefined) {
       errorList.push("Please enter a valid state")
     }
-    if(newData.zipcode === undefined){
+    if (newData.zipcode === undefined) {
       errorList.push("Please enter a valid zipcode")
     }
-    if(newData.rating === undefined){
+    if (newData.rating === undefined) {
       errorList.push("Please enter a valid rating")
     }
-    if(newData.description === undefined){
-      errorList.push("Please enter a valid description")
-    } 
-    if(newData.city === undefined){
+    if (newData.description === undefined) {
       errorList.push("Please enter a valid description")
     }
-   
+    if (newData.city === undefined) {
+      errorList.push("Please enter a valid description")
+    }
+
 
     const requestOptions = {
       // method: 'POST',
-      headers: { "authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo` },
-      
-  };
+      headers: { "authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo` },
 
-    if(errorList.length < 1){
+    };
+
+    if (errorList.length < 1) {
       api.patch("/edit", newData, requestOptions)
-      .then(res => {
-        console.log(res)
-        const dataUpdate = [...data];
-        const index = oldData.tableData.id;
-        dataUpdate[index] = newData;
-        setData([...dataUpdate]);
-        resolve()
-        setIserror(false)
-        setErrorMessages([])
-      })
-      .catch(error => {
-        setErrorMessages(["Update failed! Server error"])
-        setIserror(true)
-        resolve()
-        
-      })
-    }else{
+        .then(res => {
+          console.log(res)
+          const dataUpdate = [...data];
+          const index = oldData.tableData.id;
+          dataUpdate[index] = newData;
+          setData([...dataUpdate]);
+          resolve()
+          setIserror(false)
+          setErrorMessages([])
+        })
+        .catch(error => {
+          setErrorMessages(["Update failed! Server error"])
+          setIserror(true)
+          resolve()
+
+        })
+    } else {
       setErrorMessages(errorList)
       setIserror(true)
       resolve()
 
     }
-    
+
   }
-  
+
 
   const handleRowAdd = (newData, resolve) => {
     //validation
     let errorList = []
 
-  
-    
-    if(newData.name === undefined){
+
+
+    if (newData.name === undefined) {
       errorList.push("Please enter last name")
     }
-    
-    if(newData.phone === undefined){
+
+    if (newData.phone === undefined) {
       errorList.push("Please enter a valid phone")
     }
-    if(newData.street === undefined){
+    if (newData.street === undefined) {
       errorList.push("Please enter a valid street address")
     }
-    if(newData.state === undefined){
+    if (newData.state === undefined) {
       errorList.push("Please enter a valid state")
     }
-    if(newData.zipcode === undefined){
+    if (newData.zipcode === undefined) {
       errorList.push("Please enter a valid zipcode")
     }
-    if(newData.rating === undefined){
+    if (newData.rating === undefined) {
       errorList.push("Please enter a valid rating")
     }
-    if(newData.description === undefined){
+    if (newData.description === undefined) {
       errorList.push("Please enter a valid description")
-    } 
-    if(newData.city === undefined){
+    }
+    if (newData.city === undefined) {
       errorList.push("Please enter a valid description")
     }
     const requestOptions = {
       // method: 'POST',
-      headers: { "authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo` },
-      
-  };
+      headers: { "authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo` },
 
-    if(errorList.length < 1){ //no error
-          api.post("/add",newData ,requestOptions)
-      .then(res => {
-        let dataToAdd = [...data];
-        dataToAdd.push(newData);
-        setData(dataToAdd);
-        resolve()
-        setErrorMessages([])
-        setIserror(false)
-      })
-      .catch(error => {
-        setErrorMessages(["Cannot add data. Server error!"])
-        setIserror(true)
-        resolve()
-      })
-    }else{
+    };
+
+    if (errorList.length < 1) { //no error
+      api.post("/add", newData, requestOptions)
+        .then(res => {
+          let dataToAdd = [...data];
+          dataToAdd.push(newData);
+          setData(dataToAdd);
+          resolve()
+          setErrorMessages([])
+          setIserror(false)
+        })
+        .catch(error => {
+          setErrorMessages(["Cannot add data. Server error!"])
+          setIserror(true)
+          resolve()
+        })
+    } else {
       setErrorMessages(errorList)
       setIserror(true)
       resolve()
     }
 
-    
+
   }
 
   const handleRowDelete = (oldData, resolve) => {
-    
-    api.delete("/users/"+oldData.id)
+
+    api.delete("/users/" + oldData.id)
       .then(res => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;
@@ -241,52 +239,52 @@ function Demo() {
 
 
   return (
-  
+
     <div className="App">
       <div> Admin Page </div>
       <Grid container spacing={1}>
-          <Grid item md={12}></Grid>
-          <Grid item md={12}>
+        <Grid item md={12}></Grid>
+        <Grid item md={12}>
           <div>
-            {iserror && 
+            {iserror &&
               <Alert severity="error">
-                  {errorMessages.map((msg, i) => {
-                      return <div key={i}>{msg}</div>
-                  })}
+                {errorMessages.map((msg, i) => {
+                  return <div key={i}>{msg}</div>
+                })}
               </Alert>
-            }       
+            }
           </div>
-            <MaterialTable
-              title="Service providers Details"
-              columns={columns}
-              data={data}
-              icons={tableIcons}
-              editable={{
-                onRowUpdate: (newData, oldData) =>
-                  new Promise((resolve) => {
-                      handleRowUpdate(newData, oldData, resolve);
-                      
-                  }),
-                onRowAdd: (newData) =>
-                  new Promise((resolve) => {
-                    handleRowAdd(newData, resolve)
-                  }),
-                onRowDelete: (oldData) =>
-                  new Promise((resolve) => {
-                    handleRowDelete(oldData, resolve)
-                  }),
-              }}
-            />
-          </Grid>
-          <Grid item xs={3}></Grid>
-        </Grid>
+          <MaterialTable
+            title="Service providers Details"
+            columns={columns}
+            data={data}
+            icons={tableIcons}
+            editable={{
+              onRowUpdate: (newData, oldData) =>
+                new Promise((resolve) => {
+                  handleRowUpdate(newData, oldData, resolve);
 
-        <div>
-         <h1>
-           Vehicle Details</h1> 
-        </div>
+                }),
+              onRowAdd: (newData) =>
+                new Promise((resolve) => {
+                  handleRowAdd(newData, resolve)
+                }),
+              onRowDelete: (oldData) =>
+                new Promise((resolve) => {
+                  handleRowDelete(oldData, resolve)
+                }),
+            }}
+          />
+        </Grid>
+        <Grid item xs={3}></Grid>
+      </Grid>
+
+      <div>
+        <h1>
+          Vehicle Details</h1>
+      </div>
     </div>
   );
 }
 
-export default Demo;
+export default AdminPage;
