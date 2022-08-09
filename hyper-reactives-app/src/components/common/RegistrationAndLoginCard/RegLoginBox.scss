@@ -12,3 +12,13 @@
     font-size: 32px;
     margin: 10px 0;
 }
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.formButton {
+    width: 40%;
+}
