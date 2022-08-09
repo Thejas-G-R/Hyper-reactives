@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { forwardRef } from 'react';
 // import Avatar from 'react-avatar';
 import Grid from '@material-ui/core/Grid'
+ import {constants}  from '../../utils/constants';
 
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
@@ -22,6 +23,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
+//  import { constants } from 'buffer';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -50,18 +52,25 @@ const api = axios.create({
 
 
 function ValidatePhone(phone){
-  const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-  return re.test(phone);
+  // const re = /^(1-)?\d{3}-\d{3}-\d{4}$/;
+  
+  console.log(RegExp(constants.ADMIN_EDIT_FIELD_PHONE).test(phone));
+  return RegExp(constants.ADMIN_EDIT_FIELD_PHONE).test(phone);
+  
 }
 
 function ValidateZipCode(zipcode){
-  const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-  return re.test(zipcode);
+  // const re = /^[0-9]{5}(?:-[0-9]{4})?$/;
+  // return re.test(zipcode);
+  console.log(RegExp(constants.ADMIN_EDIT_FIELD_ZIPCODE).test(zipcode));
+  return RegExp(constants.ADMIN_EDIT_FIELD_ZIPCODE).test(zipcode);
 }
 
 function ValidateRating(rating){
-  const re = /^((?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\]))$/;
-  return re.test(rating);
+  // const re = /[+]?([0-4]*\.[0-9]+|[0-5])/;
+  // return re.test(rating);
+  console.log(RegExp(constants.ADMIN_EDIT_FIELD_RATING).test(rating));
+  return RegExp(constants.ADMIN_EDIT_FIELD_RATING).test(rating);
 }
 
 function Demo() {
@@ -106,8 +115,8 @@ function Demo() {
       errorList.push("Please enter last name")
     }
     
-    if(newData.phone === undefined){
-      errorList.push("Please enter a valid phone")
+    if(newData.phone === undefined || ValidatePhone(newData.phone) === false ){
+      errorList.push("Please enter a valid phone number in the formate XXX-XXX-XXXX ")
     }
     if(newData.street === undefined){
       errorList.push("Please enter a valid street address")
@@ -115,17 +124,17 @@ function Demo() {
     if(newData.state === undefined){
       errorList.push("Please enter a valid state")
     }
-    if(newData.zipcode === undefined){
-      errorList.push("Please enter a valid zipcode")
+    if(newData.zipcode === undefined || ValidateZipCode(newData.zipcode) === false  ){
+      errorList.push("Please enter a valid zipcode in the formate XXXXX or XXXXX-XXXX")
     }
-    if(newData.rating === undefined){
-      errorList.push("Please enter a valid rating")
+    if(newData.rating === undefined || ValidateRating(newData.rating) === false){
+      errorList.push("Please enter a valid rating between 0 to 5 ")
     }
     if(newData.description === undefined){
       errorList.push("Please enter a valid description")
     } 
     if(newData.city === undefined){
-      errorList.push("Please enter a valid description")
+      errorList.push("Please enter a valid city name")
     }
    
 
