@@ -133,3 +133,43 @@ exports.getAllVehiclesAdmin = (req, res) => {
     });
 
 }
+
+
+exports.getServiceHistory = (req, res) => {
+
+    Vehicle.findOne({ _id: req.body.vehicleId })
+    .populate({
+        path: 'serviceHistory',
+        populate: { path: 'serviceProvider' }
+      })
+    .exec((err, vehicle) => {
+        if (err) {
+            return res.status(200).json({
+                code: 1,
+                message: "Unable to find vehicle",
+                err: err
+            })
+        }
+
+        var result = { serviceHistory: [] };
+
+        vehicle.serviceHistory.forEach(function (service) {
+            result.serviceHistory.push({
+                serviceProviderId: service.serviceProvider._id,
+                serviceProviderName: service.serviceProvider.name,
+                date: service.date,
+                mileage: service.mileage,
+                price: service.price,
+                description: service.description,
+                serviceProviderAddress: service.serviceProvider.address,
+            })
+        })
+
+        return res.status(200).json({
+            code: 0,
+            message: 'Success',
+            result
+        })
+    })
+
+}
