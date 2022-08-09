@@ -123,6 +123,7 @@ function RegLoginBox(props: any) {
         props.type === "registration" ?
             (<Card className='col-md-4 registrationCard' >
                 <Card.Body >
+                    <Card.Title className='name'>{constants.COMPANY_NAME}</Card.Title>
                     <Card.Title className='registrationHeader'>{constants.USER_REGISTRATION_HEADING}</Card.Title>
                     <Form
                         onSubmit={(e) => {
@@ -132,38 +133,39 @@ function RegLoginBox(props: any) {
                             if (isFormValid)
                                 props.callUserSignUp({ name: formValue.name, email: formValue.emailid, password: formValue.password })
                         }}
-                        noValidate
+                        noValidate className='form d-flex flex-column'
                     >
                         <Form.Group className="mb-3" controlId="name">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Name" onChange={handleInputChange} name="name" />
+                            <Form.Control type="text" placeholder="Your Name" onChange={handleInputChange} name="name" />
                             <Form.Text className="text-danger">
                                 {nameError}
                             </Form.Text>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="emailid">
                             <Form.Label>Email Id</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name="emailid" onChange={handleInputChange} />
+                            <Form.Control type="email" placeholder="Your email" name="emailid" onChange={handleInputChange} />
                             <Form.Text className="text-danger">
                                 {emailError}
                             </Form.Text>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" name="password" onChange={handleInputChange} />
+                            <Form.Control type="password" placeholder="Choose Password" name="password" onChange={handleInputChange} />
                             <Form.Text className="text-danger">
                                 {passwordError}
                             </Form.Text>
                         </Form.Group>
-                        <div className='buttons'>
-                            <Button variant='primary' type='submit' className='col-md-5'>Submit</Button>
-                            <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/login")}>Login?</Button>
+                        <div className='buttons mt-auto'>
+                            <Button type='submit' className='col-md-5 btnA'>Submit</Button>
+                            <Button type='button' className='col-md-5 btnB' onClick={() => navigate("/login")}>Sign In</Button>
                         </div>
                     </Form>
                 </Card.Body>
             </Card >) : props.type == "login" ?
-                (<Card className='col-sm-5 col-lg-3 loginCard' >
-                    <Card.Body >
+                (<Card className='col-sm-5 col-md-4 loginCard' >
+                    <Card.Body className='h-100'>
+                        <Card.Title className='name'>{constants.COMPANY_NAME}</Card.Title>
                         <Card.Title className='loginHeader'>{constants.USER_LOGIN_HEADING}</Card.Title>
                         <Form
                             onSubmit={(e) => {
@@ -171,29 +173,32 @@ function RegLoginBox(props: any) {
                                 let isFormValid = validateForm(props.type);
                                 if (isFormValid) props.callLoginAPI({ email: formValue.emailid, password: formValue.password })
                             }}
-                            noValidate
+                            noValidate className='form d-flex flex-column'
                         >
                             <Form.Group className="mb-3" controlId="emailid">
                                 <Form.Label>Email Id</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" name="emailid" onChange={handleInputChange} />
+                                <Form.Control type="email" placeholder="Your email" name="emailid" onChange={handleInputChange} />
                                 <Form.Text className="text-danger">
                                     {emailError}
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="password">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Enter Password" name="password" onChange={handleInputChange} />
+                                <Form.Control type="password" placeholder="Your Password" name="password" onChange={handleInputChange} />
                                 <Form.Text className="text-danger">
                                     {passwordError}
                                 </Form.Text>
                             </Form.Group>
-                            <div className='buttons'>
-                                <Button variant='primary' type='submit' className='col-md-5'>Submit</Button>
-                                <Button variant='secondary' type='button' className='col-md-5' onClick={() => navigate("/signup")}>Sign up?</Button>
+                            <label className='text'>Don't have an account with us?<br></br>Smash that Sign up button!</label>
+                            <div className='buttons mt-auto'>
+                                <Button type='submit' className='col-md-5 btnA'>Login</Button>
+                                <Button type='button' className='col-md-5 btnB' onClick={() => navigate("/signup")}>Sign Up</Button>
                             </div>
                         </Form>
                     </Card.Body>
-                </Card >) : null)
+                </Card >
+
+                ) : null)
 
 }
 
@@ -202,3 +207,72 @@ RegLoginBox.propTypes = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegLoginBox)
+
+
+
+
+
+
+
+
+
+//for later
+{/* <section className="vh-100" style={{backgroundColor: "#6B9CD6"}}>
+                    <div className="container py-5 h-100">
+                        <div
+                            className="row d-flex justify-content-center align-items-center h-100">
+                            <div className="col col-xl-10">
+                                <div className="card" style={{borderRadius: "1rem;"}}>
+                                    <div className="row g-0">
+                                        <div className="col-md-6 col-lg-5 d-none d-md-block">
+                                            <img
+                                                // src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+                                                alt="login form" className="img-fluid"
+                                                style={{borderRadius: "1rem 0 0 1rem;", objectFit: "fill"}} />
+                                        </div>
+                                        <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                                            <div className="card-body p-4 p-lg-5 text-black">
+            
+                                                <form action="login" method="POST">
+            
+                                                    <div className="d-flex align-items-center mb-3 pb-1">
+                                                        <i className="fas fa-cubes fa-2x me-3" style={{color: "#ff6219;"}}></i>
+                                                        <span className="h1 fw-bold mb-0">Dunes</span>
+                                                    </div>
+            
+                                                    <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing: "1px;"}}>Sign
+                                                        into your account</h5>
+            
+                                                    <div className="form-outline mb-4">
+                                                        <input type="text" id="username" name="username"
+                                                            className="form-control form-control-lg" required minLength={5}/> <label
+                                                            className="form-label" htmlFor="form2Example17">Username</label>
+                                                    </div>
+            
+                                                    <div className="form-outline mb-4">
+                                                        <input type="password" id="password" name="password"
+                                                            className="form-control form-control-lg" required minLength={3}/> <label
+                                                            className="form-label" htmlFor="form2Example27">Password</label>
+                                                    </div>
+            
+                                                    <div className="pt-1 mb-4">
+                                                     <input type="submit" value="Submit"/> 
+             											<button className="btn btn-dark btn-lg btn-block" type="button">Login</button>
+             										
+                                                     </div>
+                                                                                    
+                                                    <p className="mb-5 pb-lg-2" style={{color: "#393f81;"}}>
+                                                        Don't have an account? <a href="register" style={{color: "#393f81;"}}>Register
+                                                            here</a>
+                                                    </p>
+                                                    
+                                                </form>
+            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section> */}
