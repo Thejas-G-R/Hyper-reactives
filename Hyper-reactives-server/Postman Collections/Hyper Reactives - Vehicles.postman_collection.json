@@ -93,7 +93,7 @@
 					"urlencoded": [
 						{
 							"key": "updatedStatus",
-							"value": "Approved",
+							"value": "Requested",
 							"type": "default"
 						},
 						{
@@ -121,8 +121,11 @@
 		},
 		{
 			"name": "getAll",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "authorization",
@@ -145,6 +148,40 @@
 						"user",
 						"vehicle",
 						"getAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll Admin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NTk5MTI2Nzh9.4jQoMx0b2ecCanQxkGdv7YwxZxwvv5TXFRFF5FKlJpo",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/vehicle/getAdminAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"vehicle",
+						"getAdminAll"
 					]
 				}
 			},

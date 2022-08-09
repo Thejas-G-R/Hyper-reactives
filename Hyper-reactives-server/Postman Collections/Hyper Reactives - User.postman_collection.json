@@ -21,12 +21,12 @@
 					"urlencoded": [
 						{
 							"key": "name",
-							"value": "\"Vikas\"",
+							"value": "\"Admin\"",
 							"type": "default"
 						},
 						{
 							"key": "email",
-							"value": "vikas@gmail.com",
+							"value": "admin@gmail.com",
 							"type": "default"
 						},
 						{

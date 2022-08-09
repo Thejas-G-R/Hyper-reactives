@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "4ea35e84-a0d3-4f88-ba5c-329eabd93ec2",
+		"name": "Hyper Reactives - Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getReceipt",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmU4YWZhYTAzMjlkZmIyM2U2ZDc3ZjEiLCJpYXQiOjE2NTk5MzMxMTV9.XiMqNwLaNQcdLkJ6CzWweBPZPxX98QFcRkv6-P_Kitc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "vehicleId",
+							"value": "62f091de5b66ec5dd0032897",
+							"type": "default"
+						},
+						{
+							"key": "serviceProviderId",
+							"value": "62f0296d81cf1541742ad278",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/vehicle/service/getReceipt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"vehicle",
+						"service",
+						"getReceipt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approveReceipt",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmU4YWZhYTAzMjlkZmIyM2U2ZDc3ZjEiLCJpYXQiOjE2NTk5MzMxMTV9.XiMqNwLaNQcdLkJ6CzWweBPZPxX98QFcRkv6-P_Kitc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "vehicleId",
+							"value": "62f091de5b66ec5dd0032897",
+							"type": "default"
+						},
+						{
+							"key": "serviceProviderId",
+							"value": "62f0296d81cf1541742ad278",
+							"type": "default"
+						},
+						{
+							"key": "date",
+							"value": "8/8/2022",
+							"type": "default"
+						},
+						{
+							"key": "mileage",
+							"value": "166",
+							"type": "default"
+						},
+						{
+							"key": "description",
+							"value": "Inspecting and cleaning the battery. Checking hydraulic fluid and coolant levels. Tyre puncture repair and refill with Nitrogen. ",
+							"type": "default"
+						},
+						{
+							"key": "price",
+							"value": "139",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/vehicle/service/approveReceipt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"vehicle",
+						"service",
+						"approveReceipt"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

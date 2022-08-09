@@ -1,9 +1,43 @@
 const Vehicle = require("../models/vehicle")
 const ServiceProvider = require("../models/serviceProvider")
 const { receiptGenerator } = require("../services/receiptGenerator")
+const Service = require("../models/service")
 
 exports.approveReceipt = (req, res) => {
+
+    const service = new Service({
+        vehicle: req.body.vehicleId,
+        serviceProvider: req.body.serviceProviderId,
+        date: req.body.date,
+        mileage: req.body.mileage,
+        description: req.body.description,
+        price: req.body.price,
+    })
+
+    service.save((err, service) => {
+        if (err) {
+            return res.status(400).json({
+                error: "Unable to add service",
+                err: err
+            })
+        }
+
+
+        Vehicle.findOneAndUpdate({ _id: req.body.vehicleId }, { $push: { serviceHistory: service._id } }, { new: true }, (err, vehicle) => {
+            if (err) {
+                return res.status(400).json({
+                    error: "Unable to add service to vehicle",
+                    err: err
+                })
+            }
     
+            return res.json({
+                message: "Success",
+                service
+            })
+        })
+    })
+
 }
 
 exports.getReceipt = (req, res) => {
