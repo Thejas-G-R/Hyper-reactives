@@ -32,11 +32,13 @@ app.use(cors())
 const userRoutes = require("./routes/user")
 const serviceProviderRoutes = require("./routes/serviceProvider")
 const vehicleRoutes = require("./routes/vehicle")
+const serviceRoutes = require("./routes/service")
 
 // Using routes
 app.use('/user', userRoutes)
 app.use('/serviceProvider', serviceProviderRoutes)
 app.use('/user/vehicle', vehicleRoutes)
+app.use('/user/vehicle/service', serviceRoutes)
 
 
 const port = process.env.PORT || 8000

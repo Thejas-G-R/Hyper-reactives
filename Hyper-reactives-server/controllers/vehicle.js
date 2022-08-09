@@ -75,8 +75,42 @@ exports.getAllVehicles = (req, res) => {
                     registrationState: vehicle.registrationState,
                     VIN: vehicle.VIN,
                     insuranceNumber: vehicle.insuranceNumber,
-                    status: vehicle.status,
+                    status: vehicle.status
                 })
+        });
+
+        res.send(result);
+    });
+
+}
+
+
+exports.getAllVehiclesAdmin = (req, res) => {
+
+    Vehicle.find({}, function (err, vehicles) {
+        if (err) {
+            return res.status(400).json({
+                error: "Unable to get vehicles",
+                err: err
+            })
+        }
+
+        var result = { vehicles: [] };
+
+        vehicles.forEach(function (vehicle) {
+            result.vehicles.push({
+                id: vehicle._id,
+                make: vehicle.make,
+                model: vehicle.model,
+                ownerId: vehicle.owner,
+                year: vehicle.year,
+                color: vehicle.color,
+                registrationNumber: vehicle.registrationNumber,
+                registrationState: vehicle.registrationState,
+                VIN: vehicle.VIN,
+                insuranceNumber: vehicle.insuranceNumber,
+                status: vehicle.status
+            })
         });
 
         res.send(result);

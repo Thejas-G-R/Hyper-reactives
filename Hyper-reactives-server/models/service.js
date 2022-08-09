@@ -27,8 +27,11 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+    price: {
+        type: Number,
+        required: true,
     }
-
 }, { timestamps: true })
 
 module.exports = mongoose.model("Service", serviceSchema)
