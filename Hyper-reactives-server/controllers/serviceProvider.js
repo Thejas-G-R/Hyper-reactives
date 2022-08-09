@@ -38,7 +38,7 @@ exports.add = (req, res) => {
 
         return res.status(200).json({
             code: 0,
-            message: "Success",
+            message: 'Success',
             serviceProvider
         })
     })
@@ -72,7 +72,7 @@ exports.getAll = (req, res) => {
 
         res.status(200).json({
             code: 0,
-            message: success,
+            message: 'Success',
             serviceProviders
         })
     });
@@ -106,7 +106,7 @@ exports.edit = (req, res) => {
 
         res.status(200).json({
             code: 0,
-            message: success,
+            message: 'Success',
             provider
         })
     })

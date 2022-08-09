@@ -31,7 +31,7 @@ exports.signup = (req, res) => {
 
         return res.status(200).json({
             code: 0,
-            message: "Success",
+            message: 'Success',
             user
         })
     })
@@ -67,7 +67,7 @@ exports.signin = (req, res) => {
         const { _id, name, email } = user
         return res.status(200).json({
             code: 0,
-            message: success,
+            message: 'Success',
             token,
             user: {
                 _id,
@@ -83,6 +83,6 @@ exports.signout = (req, res) => {
     res.clearCookie("token")
     return res.status(200).json({
         code: 0,
-        message: "User siginout successful"
+        message: 'Success'
     })
 }

@@ -26,7 +26,7 @@ exports.add = (req, res) => {
 
         return res.status(200).json({
             code: 0,
-            message: "Success",
+            message: 'Success',
             vehicle
         })
     })
@@ -47,7 +47,7 @@ exports.changeStatus = (req, res) => {
 
         return res.status(200).json({
             code: 0,
-            message: "Success",
+            message: 'Success',
             vehicle
         })
     })

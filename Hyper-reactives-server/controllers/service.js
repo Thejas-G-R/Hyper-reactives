@@ -35,7 +35,7 @@ exports.approveReceipt = (req, res) => {
     
             return res.json({
                 code: 0,
-                message: "Success",
+                message: 'Success',
                 service
             })
         })
@@ -71,7 +71,11 @@ function getReceipt(body, res) {
 
             var result = receiptGenerator(vehicle, serviceProvider)
 
-            return res.status(200).send(result)
+            return res.status(200).json({
+                code: 0,
+                message: 'Success',
+                result
+            })
         })
 
     })
