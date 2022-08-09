@@ -1,16 +1,19 @@
 @import '../../../styles/colors';
 
 
-.registrationHeader {
-    text-align: center;
-    font-size: 32px;
-    margin: 10px 0;
-}
-
+.registrationHeader,
 .loginHeader {
     text-align: center;
-    font-size: 32px;
-    margin: 10px 0;
+    font-size: 22px;
+    margin: 20px;
+    min-height: 27px;
+}
+
+.name {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    min-height: 36px;
 }
 
 .buttons {
@@ -19,6 +22,29 @@
     align-items: center;
 }
 
-.formButton {
-    width: 40%;
+.btnA {
+    background-color: #7e7390 !important;
+    border-color: #7e7390;
+    border-radius: 10px;
+}
+
+.btnB {
+    background-color: #7a6d72 !important;
+    border-color: #7a6d72;
+    border-radius: 10px;
+}
+
+.text {
+    font-size: 13px;
+}
+
+.form {
+    min-height: 350px;
+}
+
+.registrationCard,
+.loginCard {
+    min-height: 500px;
+    border-radius: 20px;
+    border-color: #2c2a2f;
 }
