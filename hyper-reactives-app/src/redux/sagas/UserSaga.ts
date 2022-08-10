@@ -8,9 +8,13 @@ function* userSignUpSaga({ data }: Params) {
     var result: any;
     yield userSignupAPI(data).then((response) => {
         result = response.data
-    }).catch((err) => console.log(err));
+    }).catch((err) => {
+        console.log(err)
+        alert("Unable to sign up. Please try again later")
+    });
     if (result && result.message === "Success")
         yield put({ type: USER_SIGN_UP_SUCCESS, data: result.message })
+    else alert("Unable to sign up. Please try again later")
 
 }
 
@@ -19,9 +23,15 @@ function* userLoginSaga({ data }: param) {
     var result: any;
     yield userSigninAPI(data).then((response) => {
         result = response.data
-    }).catch((err) => console.log(err));
+    }).catch((err) => {
+        console.log(err)
+
+        alert("Wrong credentials. Please try again later.")
+    });
     if (result && result.token && result.token.length > 0)
         yield put({ type: USER_SIGN_IN_SUCCESS, data: result })
+    else
+        alert("Wrong credentials. Please try again later.")
 }
 
 type carsParam = { data: { authToken: string }, type: string }
