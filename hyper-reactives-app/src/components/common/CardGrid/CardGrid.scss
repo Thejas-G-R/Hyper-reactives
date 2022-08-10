@@ -3,6 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin: 20px;
 }
 
 .grid>div {
@@ -11,4 +12,39 @@
 
 .vehicleCard {
     margin: 20px 0;
+}
+
+.tit {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.ima {
+    border-radius: 15px 15px 0px 0px;
+}
+
+.carButton1 {
+    color: #fff !important;
+    display: block;
+    width: 150px;
+    height: 56px;
+    font-weight: 600;
+    background: rgba(130, 78, 98, 1) !important;
+    border: none;
+    text-transform: uppercase;
+    border-radius: 25px;
+    margin-right: 70px;
+}
+
+.carButton2 {
+    color: #fff !important;
+    display: block;
+    width: 150px;
+    height: 56px;
+    font-weight: 600;
+    background: #7a6d72 !important;
+    border: none;
+    text-transform: uppercase;
+    border-radius: 25px;
+    margin-right: 70px;
 }

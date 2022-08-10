@@ -13,9 +13,10 @@ export const Dashboard = (props: any) => {
     const [ownVehicles, setOwnVehicles] = useState(true)
     const [vehicles, setVehicles] = useState([])
     useEffect(() => {
-        if (!props.authToken) {
-            navigate("/404")
-        } else if (props.authToken) {
+        // if (!props.authToken) {
+        //     navigate("/404")
+        // } else 
+        if (props.authToken) {
             props.callGetUserCars({ authToken: props.authToken })
         }
     }, [])
@@ -30,9 +31,6 @@ export const Dashboard = (props: any) => {
     return (
         <div className='content'>
             <ImageCard showAvatar={true} showAddButton={false} />
-            <div className="dashboradImage">
-                <Image fluid src='' alt='' />
-            </div>
             <ImageCard showAvatar={false} showAddButton={true} />
             <CardGrid empty={ownVehicles} vehicles={vehicles} />
         </div>

@@ -9,14 +9,17 @@ export const CardGrid = (props: any) => {
     const renderCards = (vehicle: any, index: number) => {
         return (
             <Card style={{ width: '18rem' }} key={index} className={`vehicleCard ${vehicle.status !== "Approved" ? "disabled" : ""}`}>
-                <Card.Img variant="top" src="https://picsum.photos/100/100" />
+                <Card.Img className='ima' variant="top" src="https://picsum.photos/100/100" />
                 <Card.Body>
-                    <Card.Title>{vehicle.make} {vehicle.model}</Card.Title>
+                    <Card.Title className='tit'>{vehicle.make} {vehicle.model}</Card.Title>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
+                        Registered Licence No: {vehicle.registrationNumber} <br></br>
+                        VIN: {vehicle.VIN} <br></br>
+                        Status: {vehicle.status}
                     </Card.Text>
-                    <Button variant="primary" disabled={vehicle.status !== "Approved"} onClick={() => navigate("vehicle-history", { state: { vehicle } })}>Manage Car</Button>
+                    <div className='d'>
+                        <button className={`${vehicle.status !== "Approved" ? 'carButton2' : 'carButton1'}`} disabled={vehicle.status !== "Approved"} onClick={() => navigate("vehicle-history", { state: { vehicle } })}>Open</button>
+                    </div>
                 </Card.Body>
             </Card>)
     }
