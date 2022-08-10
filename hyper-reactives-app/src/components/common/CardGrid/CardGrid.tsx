@@ -4,12 +4,13 @@ import { Button, Card } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import "./CardGrid.scss"
+
 export const CardGrid = (props: any) => {
     const navigate = useNavigate();
     const renderCards = (vehicle: any, index: number) => {
         return (
             <Card style={{ width: '18rem' }} key={index} className={`vehicleCard ${vehicle.status !== "Approved" ? "disabled" : ""}`}>
-                <Card.Img className='ima' variant="top" src="https://picsum.photos/100/100" />
+                <Card.Img className='ima' variant="top" src="/assets/frontview.jpeg" />
                 <Card.Body>
                     <Card.Title className='tit'>{vehicle.make} {vehicle.model}</Card.Title>
                     <Card.Text>

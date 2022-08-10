@@ -1,7 +1,32 @@
-.cardContainer {
+.titleOfCard {
+    text-align: center;
+    background-color: #f3ebf2;
+    padding: 20px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.oo {
+    width: 500px;
+    border-radius: 20px;
+    margin: 50px;
+}
+
+.dd {
     display: flex;
+    width: 100%;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    height: 100vh;
+}
+
+.bb {
+    color: #fff !important;
+    display: block;
+    width: 250px;
+    height: 54px;
+    font-size: 14px;
+    background: #352d3f !important;
+    border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 40px;
+    margin: 30px;
 }
