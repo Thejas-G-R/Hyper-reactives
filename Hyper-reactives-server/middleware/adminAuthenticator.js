@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require("../models/user")
 
 exports.adminAuthenticate = (req, res, next) => {
     const authHeader = req.headers['authorization']
@@ -8,9 +9,21 @@ exports.adminAuthenticate = (req, res, next) => {
 
     jwt.verify(token, process.env.SECRET, (err, user) => {
         console.log(err)
-        if (err || user._id != '62f0402cd5000147691e1881') return res.sendStatus(403)
-        req.user = user
-        next()
+
+        User.findById(user._id, (err, user) => {
+            if (err || !user) {
+                return res.status(200).json({
+                    code: 1,
+                    message: "User was not found"
+                })
+            }
+            const { _id, name, email } = user
+
+            if (err || email != 'admin@gmail.com') return res.sendStatus(401)
+            req.user = user
+            next()
+
+        })
     })
 }
 
