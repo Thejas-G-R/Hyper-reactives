@@ -3,6 +3,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { Timeline, TimelineItem } from 'vertical-timeline-component-for-react';
+
+
+
 export const TimeLineComponent = (props: any) => {
     const renderTimeLineItems = (serviceHistoryItem: any, index: number) => {
         const address = serviceHistoryItem.serviceProviderAddress.street + ", " + serviceHistoryItem.serviceProviderAddress.city + ", " + serviceHistoryItem.serviceProviderAddress.state + ", " + serviceHistoryItem.serviceProviderAddress.zipcode

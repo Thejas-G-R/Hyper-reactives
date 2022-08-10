@@ -53,17 +53,17 @@ function VehicleApproval() {
 
   var columns = [
     {title: "id", field: "id", hidden: true},
-    {title: "make", field: "make",  editable:"never" },
-    {title: "model", field: "model", editable:"never" },
-    {title: "owner", field: "ownerId", editable:"never" },
-    {title: "color", field: "color", editable:"never" },
-    {title: "year", field: "year", editable:"never" },
-    {title: "registrationNumber", field: "registrationNumber", editable:"never" },
-    {title: "registrationState", field: "registrationState", editable:"never" },
+    {title: "Make", field: "make",  editable:"never" },
+    {title: "Model", field: "model", editable:"never" },
+    {title: "Owner", field: "ownerId", editable:"never", hidden: true },
+    {title: "Color", field: "color", editable:"never" },
+    {title: "Year", field: "year", editable:"never" },
+    {title: "Registration Number", field: "registrationNumber", editable:"never" },
+    {title: "Registration State", field: "registrationState", editable:"never" },
     {title: "VIN", field: "VIN", editable:"never" },
-    {title: "insuranceNumber", field: "insuranceNumber", editable:"never" },
-    {title: "status", field: "status" , lookup: { Approved: "Approved", Requested: "Requested" }},
-    {title: "serviceHistory", field: "serviceHistory", editable:"never" }
+    {title: "Insurance Number", field: "insuranceNumber", editable:"never" },
+    {title: "Status", field: "status" , lookup: { Approved: "Approved", Requested: "Requested" }},
+    {title: "ServiceHistory", field: "serviceHistory", editable:"never" }
   ]
   const [data, setData] = useState([]); //table data
 
