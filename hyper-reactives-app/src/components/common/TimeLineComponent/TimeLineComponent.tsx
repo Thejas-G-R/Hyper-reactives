@@ -32,7 +32,7 @@ export const TimeLineComponent = (props: any) => {
     }
     return (
         <div >
-            <Timeline lineColor={'#ddd'} >
+            <Timeline lineColor={'#ddd'} animate={false}>
                 {props.serviceHistory.map(renderTimeLineItems)}
             </Timeline>
         </div>

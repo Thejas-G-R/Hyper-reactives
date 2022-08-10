@@ -14,7 +14,7 @@ export const ImageCard = (props: any) => {
                 <Card className='imageCardContainer' style={{ flexDirection: 'row' }}>
                     <Card.Img className='avatarImage' src="/assets/lambo.jpeg" />
                     <Card.Body>
-                        <Card.Title className='text3'>Welcome back Vikas</Card.Title>
+                        <Card.Title className='text3'>Welcome back {props.name}</Card.Title>
                         <Card.Text className='text1'>
                             Let's AutoMate Your Car Maintainance
                         </Card.Text>
@@ -48,6 +48,7 @@ export const ImageCard = (props: any) => {
 ImageCard.propTypes = {
     showAvatar: PropTypes.bool,
     showAddButton: PropTypes.bool,
+    name: PropTypes.string
 }
 
 const mapStateToProps = (state: any) => ({})

@@ -30,8 +30,8 @@ export const Dashboard = (props: any) => {
 
     return (
         <div className='content'>
-            <ImageCard showAvatar={true} showAddButton={false} />
-            <ImageCard showAvatar={false} showAddButton={true} />
+            <ImageCard showAvatar={true} showAddButton={false} name={props.userName} />
+            <ImageCard showAvatar={false} showAddButton={true} name={props.userName} />
             <CardGrid empty={ownVehicles} vehicles={vehicles} />
         </div>
     )
@@ -45,6 +45,7 @@ const mapStateToProps = (state: any) => ({
     authToken: state.userReducer ? state.userReducer.authToken ? state.userReducer.authToken : null : null,
     vehicles: state.userReducer ? state.userReducer.vehicles ? state.userReducer.vehicles : null : null,
     ownVehicles: state.userReducer ? state.userReducer.ownVehicles ? state.userReducer.ownVehicles : false : false,
+    userName: state.userReducer ? state.userReducer.name ? state.userReducer.name : null : null,
 })
 
 const mapDispatchToProps = (dispatch: any) => {

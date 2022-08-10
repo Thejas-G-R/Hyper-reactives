@@ -1,9 +1,10 @@
-import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS, USER_GET_CARS_SUCCESS, CAR_SERVICE_HISTORY_SUCCESS, VEHICLE_REG_SUCCESS } from "../types/actionTypes";
+import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS, USER_GET_CARS_SUCCESS, CAR_SERVICE_HISTORY_SUCCESS, VEHICLE_REG_SUCCESS, GET_ALL_SERVICE_PROVIDERS_SUCCESS, GET_RECEIPT_DETAILS_SUCCESS, APPROVE_RECEIPT_SUCCESS, RESET_APPROVED_RECEIPT_FLAG, RESET_APPROVED_STATE_FLAG } from "../types/actionTypes";
 
 var initialState = {
     signInSuccess: false,
     signUpSuccess: false,
-    vehicleRegistrationSuccess: false
+    vehicleRegistrationSuccess: false,
+    isServiceReceiptApproved: false,
 }
 
 export const userReducer = (state = initialState, action: { type: string, data: any }) => {
@@ -43,7 +44,19 @@ export const userReducer = (state = initialState, action: { type: string, data: 
             if (action.data === "Success")
                 return { ...state, vehicleRegistrationSuccess: true };
             return state
-            
+
+        case GET_ALL_SERVICE_PROVIDERS_SUCCESS:
+            const serviceProviders = action.data.ServiceProviders
+            return { ...state, serviceProviders: [...serviceProviders] }
+
+        case GET_RECEIPT_DETAILS_SUCCESS:
+            let receiptData = action.data
+            return { ...state, receiptData: { ...receiptData } }
+        case APPROVE_RECEIPT_SUCCESS:
+            return { ...state, isServiceReceiptApproved: true }
+
+        case RESET_APPROVED_STATE_FLAG:
+            return { ...state, isServiceReceiptApproved: false, receiptData: {} }
         default:
             return state
     }

@@ -1,0 +1,47 @@
+.searchBar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.inputBar {
+    width: 45%;
+}
+
+.listGroupItem {
+    margin: 10px 0;
+}
+
+.listGroup {
+    width: 45%;
+}
+
+.serviceProvidersList {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.serviceProviderList {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 400px;
+}
+
+.serviceProviderDetails {
+    margin-right: 5%;
+    width: 65%;
+}
+
+.requestServiceButton {
+    width: 30%;
+}
+
+.serviceHereButton {
+    float: right;
+}

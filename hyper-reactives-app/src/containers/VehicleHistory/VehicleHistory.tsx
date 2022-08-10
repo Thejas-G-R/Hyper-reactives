@@ -25,6 +25,7 @@ export const VehicleHistory = (props: any) => {
         } else if (props.authToken) {
             props.callGetCarVehicleHistory({ authToken: props.authToken, vehicleId: vehicle.id })
         }
+        window.scrollTo(0, 0)
     }, [])
 
     useEffect(() => {
@@ -78,7 +79,7 @@ export const VehicleHistory = (props: any) => {
                         {constants.GET_SERVICING_DONE_TEXT}
                     </div>
                     <div className="buttonContainer">
-                        <button type='button' className='but'>Service now</button>
+                        <button type='button' className='but' onClick={() => navigate("../vehicle-servicing", { state: { vehicle } })}>Service now</button>
                     </div>
                 </div>
                 <div className="printServiceHistoryContainer">
