@@ -19,4 +19,8 @@ export const constants = {
     ADMIN_EDIT_FIELD_ZIPCODE: "^[0-9]{5}(?:-[0-9]{4})?$",
     ADMIN_EDIT_FIELD_RATING: "[+]?([0-4]*\\.[0-9]+|[0-5])",
     COMPANY_NAME: "AutoMate",
+    
+    VEHICLE_REG_YEAR: "^(19|20)\\d{2}$",
+    VEHICLE_REG_INSURANCENUM:"^[0-9]",
+    VEHICLE_REG_STATE:"^[A-Za-z]",
 }

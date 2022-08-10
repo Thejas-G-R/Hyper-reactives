@@ -112,6 +112,19 @@ function VehicleRegistrationBox(props: any) {
                 setInsuracneNumError("")
                 return false
             }
+
+            else if(formValue.year && !new RegExp(constants.VEHICLE_REG_YEAR).test(formValue.year)) {
+                setMakeError("")
+                setModelError("")
+                setYearError("year must be between 1900 - 2099")
+                setColorError("")
+                setRegistnumError("")
+                setRegiststateError("")
+                setVinError("")
+                setInsuracneNumError("")
+                return false
+            }
+
             else if(!formValue.color){
                 setMakeError("")
                 setModelError("")
@@ -147,6 +160,18 @@ function VehicleRegistrationBox(props: any) {
                 setInsuracneNumError("")
                 return false
             }
+
+            else if(formValue.registrationState && !new RegExp(constants.VEHICLE_REG_STATE).test(formValue.registrationState)) {
+                setMakeError("")
+                setModelError("")
+                setYearError("")
+                setColorError("")
+                setRegistnumError("")
+                setRegiststateError("Enter a valid State")
+                setVinError("")
+                setInsuracneNumError("")
+                return false
+            }
             else if(!formValue.VIN){
                 setMakeError("")
                 setModelError("")
@@ -170,6 +195,17 @@ function VehicleRegistrationBox(props: any) {
                 setInsuracneNumError("Insurance Number can't be blank")
                 return false
             }
+            else if(formValue.insuranceNumber && !new RegExp(constants.VEHICLE_REG_INSURANCENUM).test(formValue.insuranceNumber)) {
+                setMakeError("")
+                setModelError("")
+                setYearError("")
+                setColorError("")
+                setRegistnumError("")
+                setRegiststateError("")
+                setVinError("")
+                setInsuracneNumError("Insurance number must be only numbers")
+                return false
+            }
                 setMakeError("")
                 setModelError("")
                 setYearError("")
@@ -186,12 +222,12 @@ function VehicleRegistrationBox(props: any) {
 
         <div ><div>RegisterVehicle</div>
             <Container className='cardContainer'>
-            <Form onSubmit={ handelSubmit }>
+            <Form onSubmit={ handelSubmit } noValidate className='form d-flex flex-column'>
                 <Form.Group className="mb-3" controlId="make">
                     <Form.Label>Make</Form.Label>
                     <Form.Control type="text" placeholder="Enter make" onChange={handleInputChange} name="make" />
                     <Form.Text className="text-danger">
-
+                    {makeError}
                     </Form.Text>
                 </Form.Group>
 
@@ -201,6 +237,7 @@ function VehicleRegistrationBox(props: any) {
                     <Form.Label>Model</Form.Label>
                     <Form.Control type="text" placeholder="Enter model of the vehicle" onChange={handleInputChange} name="model" />
                     <Form.Text className="text-danger">
+                    {modeError}
                     </Form.Text>
 
                 </Form.Group>
@@ -208,7 +245,7 @@ function VehicleRegistrationBox(props: any) {
                     <Form.Label>Year</Form.Label>
                     <Form.Control type="text" placeholder="Enter the year of manufacture " onChange={handleInputChange} name="year" />
                     <Form.Text className="text-danger">
-
+                        {yearError}
                     </Form.Text>
                 </Form.Group>
 
@@ -216,7 +253,7 @@ function VehicleRegistrationBox(props: any) {
                     <Form.Label>Color</Form.Label>
                     <Form.Control type="text" placeholder="Enter the year of manufacture " onChange={handleInputChange} name="color" />
                     <Form.Text className="text-danger">
-
+                        {colorError}
                     </Form.Text>
                 </Form.Group>
 
@@ -224,7 +261,7 @@ function VehicleRegistrationBox(props: any) {
                     <Form.Label>Registration Number</Form.Label>
                     <Form.Control type="text" placeholder="Enter the Registration Number " onChange={handleInputChange} name="registrationNumber" />
                     <Form.Text className="text-danger">
-
+                        {registnumError}
                     </Form.Text>
                 </Form.Group>
 
@@ -232,7 +269,7 @@ function VehicleRegistrationBox(props: any) {
                     <Form.Label>Registration State</Form.Label>
                     <Form.Control type="text" placeholder="Enter the Registration State " onChange={handleInputChange} name="registrationState" />
                     <Form.Text className="text-danger">
-
+                        {registstateError}
                     </Form.Text>
                 </Form.Group>
 
@@ -240,7 +277,7 @@ function VehicleRegistrationBox(props: any) {
                     <Form.Label>VIN</Form.Label>
                     <Form.Control type="text" placeholder="Enter the VIN " onChange={handleInputChange} name="VIN" />
                     <Form.Text className="text-danger">
-
+                        {vinError}
                     </Form.Text>
                 </Form.Group>
 
@@ -248,7 +285,7 @@ function VehicleRegistrationBox(props: any) {
                     <Form.Label>Insurance Number</Form.Label>
                     <Form.Control type="text" placeholder="Enter the Insurance Number " onChange={handleInputChange} name="insuranceNumber" />
                     <Form.Text className="text-danger">
-
+                        {insuranceNumError}
                     </Form.Text>
                 </Form.Group>
 
