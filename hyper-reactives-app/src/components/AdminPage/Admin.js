@@ -254,9 +254,23 @@ function Demo() {
 
   return (
 
-    <div className="App">
-      <div> Admin Page </div>
-      <Grid container spacing={1}>
+    <div className="App" style={{width: "100%", alignItems: "center", display: "flex", flexDirection: "row", justifyContent: "center", flexWrap: "wrap"}}>
+      <div className="vehicleApprovalButton">
+        <button onClick={() => navigate("../vehicle-approval")} style={{ 
+          color: "#2c2a2f !important",
+          display: "block",
+          width: "300px",
+          height: "40px",
+          fontSize: "14px",
+          background: "#f3ebf2 !important",
+          border: "none",
+          letterSpacing: "1px",
+          textTransform: "uppercase",
+          borderRadius: "40px",
+          margin: "20px"
+          }}>vehicle approvals</button>
+      </div>
+      <Grid container spacing={1} style={{width: "80%"}}>
         <Grid item md={12}></Grid>
         <Grid item md={12}>
           <div>
@@ -268,8 +282,9 @@ function Demo() {
               </Alert>
             }
           </div>
+          <div>
           <MaterialTable
-            title="Service providers Details"
+            title="Manage your service providers"
             columns={columns}
             data={data}
             icons={tableIcons}
@@ -295,13 +310,10 @@ function Demo() {
               exportButton: true, exportAllData: true, exportFileName: "TableData"
             }}
           />
+          </div>
         </Grid>
         <Grid item xs={3}></Grid>
       </Grid>
-
-      <div className="vehicleApprovalButton">
-        <button onClick={() => navigate("../vehicle-approval")} className="btn btn-outline-success" style={{ margin: "20px 0px 20px 20px" }}>Vehicle Approval</button>
-      </div>
     </div>
   );
 }

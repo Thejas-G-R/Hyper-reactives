@@ -63,7 +63,6 @@ function VehicleApproval() {
     {title: "VIN", field: "VIN", editable:"never" },
     {title: "Insurance Number", field: "insuranceNumber", editable:"never" },
     {title: "Status", field: "status" , lookup: { Approved: "Approved", Requested: "Requested" }},
-    {title: "ServiceHistory", field: "serviceHistory", editable:"never" }
   ]
   const [data, setData] = useState([]); //table data
 
@@ -159,11 +158,9 @@ function VehicleApproval() {
 
 
   return (
-  
-    <div className="App">
-        <div>
-         <h3>
-           Vehicle Details</h3> </div>
+    
+    <div style={{ alignItems: "center", display: "flex", justifyContent: "center", margin: "20px"}}>
+    <div className="App" style={{width: "80%", alignItems: "center", justifyContent: "center"}}>
            <Grid container spacing={1}>
           <Grid item md={12}></Grid>
           <Grid item md={12}>
@@ -200,6 +197,7 @@ function VehicleApproval() {
           <Grid item md={12}></Grid>
         </Grid>
 
+    </div>
     </div>
   );
 }
