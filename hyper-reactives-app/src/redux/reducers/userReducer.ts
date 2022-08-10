@@ -1,4 +1,4 @@
-import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS, USER_GET_CARS_SUCCESS, CAR_SERVICE_HISTORY_SUCCESS, VEHICLE_REG_SUCCESS, GET_ALL_SERVICE_PROVIDERS_SUCCESS, GET_RECEIPT_DETAILS_SUCCESS, APPROVE_RECEIPT_SUCCESS, RESET_APPROVED_RECEIPT_FLAG, RESET_APPROVED_STATE_FLAG } from "../types/actionTypes";
+import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS, USER_GET_CARS_SUCCESS, CAR_SERVICE_HISTORY_SUCCESS, VEHICLE_REG_SUCCESS, GET_ALL_SERVICE_PROVIDERS_SUCCESS, GET_RECEIPT_DETAILS_SUCCESS, APPROVE_RECEIPT_SUCCESS, RESET_APPROVED_RECEIPT_FLAG, RESET_APPROVED_STATE_FLAG, SIGN_OUT_CURRENT_USER } from "../types/actionTypes";
 
 var initialState = {
     signInSuccess: false,
@@ -58,6 +58,9 @@ export const userReducer = (state = initialState, action: { type: string, data: 
 
         case RESET_APPROVED_STATE_FLAG:
             return { ...state, isServiceReceiptApproved: false, receiptData: {} }
+
+        case SIGN_OUT_CURRENT_USER:
+            return { ...initialState }
         default:
             return state
     }

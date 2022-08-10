@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_APPROVE_RECEIPT_URL, USER_CARS_API_URL, USER_CAR_SERVICE_HISTORY_URL, USER_GET_ALL_SERVICE_PROVIDERS_URL, USER_GET_SERVICE_RECEIPT_URL, USER_SIGNIN_API_URL, USER_SIGNUP_API_URL, VEHICLE_REG_URL } from "./url_helper";
+import { SIGNOUT_USER_URL, USER_APPROVE_RECEIPT_URL, USER_CARS_API_URL, USER_CAR_SERVICE_HISTORY_URL, USER_GET_ALL_SERVICE_PROVIDERS_URL, USER_GET_SERVICE_RECEIPT_URL, USER_SIGNIN_API_URL, USER_SIGNUP_API_URL, VEHICLE_REG_URL } from "./url_helper";
 
 //apply base url for axios
 const REACT_APP_APP_URL = "http://localhost:8000";
@@ -92,6 +92,17 @@ export async function vehicleRegAPI(data: {
     const url = VEHICLE_REG_URL
     return await userApi
         .post(url, data, {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": "Bearer " + data.authToken
+            }
+        })
+}
+
+export async function signoutApi(data: { authToken: string }) {
+    const url = SIGNOUT_USER_URL
+    return await userApi
+        .get(url, {
             headers: {
                 "Content-Type": "application/json",
                 "authorization": "Bearer " + data.authToken

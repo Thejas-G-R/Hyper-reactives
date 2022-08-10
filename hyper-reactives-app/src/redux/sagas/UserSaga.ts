@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { takeEvery, put } from 'redux-saga/effects'
-import { vehicleRegAPI, approveReceiptAPICall, getallServiceProvidersAPICall, getServiceReceiptAPICall, getUserCarsAPICall, getUserCarServiceHistoryAPICall, userSigninAPI, userSignupAPI } from '../../services/apis/api_helper';
-import { CALL_LOGIN_API, CALL_SIGN_UP_API, CALL_USER_CARS_API, CAR_SERVICE_HISTORY_SUCCESS, GET_ALL_SERVICE_PROVIDERS, GET_ALL_SERVICE_PROVIDERS_SUCCESS, GET_CAR_SERVICE_HISTORY, VEHICLE_REG_SUCCESS, CALL_VEL_REG_API_SUCCESS, GET_RECEIPT_DETAILS, USER_GET_CARS_SUCCESS, USER_SIGN_IN_SUCCESS, USER_SIGN_UP_SUCCESS, GET_RECEIPT_DETAILS_SUCCESS, APPROVE_RECEIPT, APPROVE_RECEIPT_SUCCESS, RESET_APPROVED_STATE_FLAG } from '../types/actionTypes'
+import { vehicleRegAPI, approveReceiptAPICall, getallServiceProvidersAPICall, getServiceReceiptAPICall, getUserCarsAPICall, getUserCarServiceHistoryAPICall, userSigninAPI, userSignupAPI, signoutApi } from '../../services/apis/api_helper';
+import { CALL_LOGIN_API, CALL_SIGN_UP_API, CALL_USER_CARS_API, CAR_SERVICE_HISTORY_SUCCESS, GET_ALL_SERVICE_PROVIDERS, GET_ALL_SERVICE_PROVIDERS_SUCCESS, GET_CAR_SERVICE_HISTORY, VEHICLE_REG_SUCCESS, CALL_VEL_REG_API_SUCCESS, GET_RECEIPT_DETAILS, USER_GET_CARS_SUCCESS, USER_SIGN_IN_SUCCESS, USER_SIGN_UP_SUCCESS, GET_RECEIPT_DETAILS_SUCCESS, APPROVE_RECEIPT, APPROVE_RECEIPT_SUCCESS, RESET_APPROVED_STATE_FLAG, USER_SIGN_OUT, SIGN_OUT_CURRENT_USER } from '../types/actionTypes'
 type Params = { data: { name: string, email: string, password: string }, type: string }
 function* userSignUpSaga({ data }: Params) {
     console.log("saga code");
@@ -92,6 +92,18 @@ function* resetFlag({ type }: resetParam) {
     yield put({ type: RESET_APPROVED_STATE_FLAG })
 }
 
+type signoutParam = { data: { authToken: string }, type: string }
+function* signout({ data }: signoutParam) {
+    var result: any
+    yield signoutApi(data).then((response) => {
+        result = response.data
+    }).catch((err) => console.log(err));
+    if (result && result.code === 0 && result.message === "Success") {
+        yield put({ type: SIGN_OUT_CURRENT_USER })
+    }
+
+}
+
 function* userSaga() {
     yield takeEvery(CALL_SIGN_UP_API, userSignUpSaga);
     yield takeEvery(CALL_LOGIN_API, userLoginSaga);
@@ -102,6 +114,7 @@ function* userSaga() {
     yield takeEvery(GET_RECEIPT_DETAILS, getServiceReceipt);
     yield takeEvery(APPROVE_RECEIPT, approveServiceReceipt);
     yield takeEvery(APPROVE_RECEIPT, resetFlag);
+    yield takeEvery(USER_SIGN_OUT, signout);
 
 }
 

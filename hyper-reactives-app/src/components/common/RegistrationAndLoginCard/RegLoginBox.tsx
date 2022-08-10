@@ -11,7 +11,8 @@ const mapStateToProps = (state: any) => {
     return {
         signInSuccess: state.userReducer.signInSuccess,
         signUpSuccess: state.userReducer.signUpSuccess,
-        isAdmin: state.userReducer.isAdmin
+        isAdmin: state.userReducer.isAdmin,
+        authToken: state.userReducer.authToken
     };
 };
 const mapDispatchToProps = (dispatch: any) => {
@@ -40,12 +41,21 @@ function RegLoginBox(props: any) {
         if (props.signUpSuccess === true)
             navigate("/login")
     }, [navigate, props.signUpSuccess]);
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
     useEffect(() => {
-        if (props.signInSuccess === true && props.isAdmin === true)
-            navigate("/layout/admin")
-        else if (props.signInSuccess === true)
-            navigate("/layout")
-    }, [navigate, props.signInSuccess]);
+        if (props.signInSuccess === true) {
+            setCookie("authToken", props.authToken, 1)
+
+            if (props.isAdmin === true)
+                navigate("/layout/admin")
+            else navigate("/layout")
+        }
+    }, [props.signInSuccess]);
 
 
     function validateForm(type: string) {

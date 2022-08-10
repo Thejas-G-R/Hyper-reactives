@@ -6,4 +6,5 @@ export const VEHICLE_REG_URL = "/vehicle/add";
 export const USER_GET_ALL_SERVICE_PROVIDERS_URL = "/serviceProvider/getAll"
 export const USER_GET_SERVICE_RECEIPT_URL = "/vehicle/service/getReceipt"
 export const USER_APPROVE_RECEIPT_URL = "/vehicle/service/approveReceipt"
+export const SIGNOUT_USER_URL = "/signout"
 

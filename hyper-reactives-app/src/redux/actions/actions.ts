@@ -1,4 +1,4 @@
-import { CALL_SIGN_UP_API, CALL_LOGIN_API, CALL_USER_CARS_API, GET_CAR_SERVICE_HISTORY, CALL_VEL_REG_API_SUCCESS, GET_ALL_SERVICE_PROVIDERS, GET_RECEIPT_DETAILS, APPROVE_RECEIPT, RESET_APPROVED_RECEIPT_FLAG } from "../types/actionTypes";
+import { CALL_SIGN_UP_API, CALL_LOGIN_API, CALL_USER_CARS_API, GET_CAR_SERVICE_HISTORY, CALL_VEL_REG_API_SUCCESS, GET_ALL_SERVICE_PROVIDERS, GET_RECEIPT_DETAILS, APPROVE_RECEIPT, RESET_APPROVED_RECEIPT_FLAG, USER_SIGN_OUT } from "../types/actionTypes";
 
 
 export const userSignup = (data: { name: string, email: string, password: string }) => {
@@ -75,5 +75,13 @@ export const resetApprovedFlag = () => {
     return {
         type: RESET_APPROVED_RECEIPT_FLAG,
         data: {}
+    };
+};
+export const signout = (data: { authToken: string }) => {
+    console.log('signout  called');
+
+    return {
+        type: USER_SIGN_OUT,
+        data
     };
 };
