@@ -24,6 +24,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 //  import { constants } from 'buffer';
 
 const tableIcons = {
@@ -74,7 +75,7 @@ function ValidateRating(rating) {
   return RegExp(constants.ADMIN_EDIT_FIELD_RATING).test(rating);
 }
 
-function Demo() {
+function Demo(props) {
   const navigate = useNavigate();
   var columns = [
     { title: "id", field: "id", hidden: true },
@@ -95,7 +96,7 @@ function Demo() {
 
   useEffect(() => {
     // api.get("/getAll?authorization=")
-    api.get("serviceProvider/getAll", { headers: { "authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0` } })
+    api.get("serviceProvider/getAll", { headers: { "authorization": "Bearer " + props.authToken } })
       .then(res => {
         console.log(res)
         console.log(res.data.code)
@@ -141,7 +142,7 @@ function Demo() {
 
     const requestOptions = {
       // method: 'POST',
-      headers: { "authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0` },
+      headers: { "authorization": "Bearer " + props.authToken },
 
     };
 
@@ -206,7 +207,7 @@ function Demo() {
     }
     const requestOptions = {
       // method: 'POST',
-      headers: { "authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0` },
+      headers: { "authorization": "Bearer " + props.authToken },
 
     };
 
@@ -254,9 +255,9 @@ function Demo() {
 
   return (
 
-    <div className="App" style={{width: "100%", alignItems: "center", display: "flex", flexDirection: "row", justifyContent: "center", flexWrap: "wrap"}}>
+    <div className="App" style={{ width: "100%", alignItems: "center", display: "flex", flexDirection: "row", justifyContent: "center", flexWrap: "wrap" }}>
       <div className="vehicleApprovalButton">
-        <button onClick={() => navigate("../vehicle-approval")} style={{ 
+        <button onClick={() => navigate("../vehicle-approval")} style={{
           color: "#2c2a2f !important",
           display: "block",
           width: "300px",
@@ -268,9 +269,9 @@ function Demo() {
           textTransform: "uppercase",
           borderRadius: "40px",
           margin: "20px"
-          }}>vehicle approvals</button>
+        }}>vehicle approvals</button>
       </div>
-      <Grid container spacing={1} style={{width: "80%"}}>
+      <Grid container spacing={1} style={{ width: "80%" }}>
         <Grid item md={12}></Grid>
         <Grid item md={12}>
           <div>
@@ -283,33 +284,33 @@ function Demo() {
             }
           </div>
           <div>
-          <MaterialTable
-            title="Manage your service providers"
-            columns={columns}
-            data={data}
-            icons={tableIcons}
-            editable={{
-              isDeleteHidden: (newData) => newData.rating > 0,
+            <MaterialTable
+              title="Manage your service providers"
+              columns={columns}
+              data={data}
+              icons={tableIcons}
+              editable={{
+                isDeleteHidden: (newData) => newData.rating > 0,
 
-              onRowUpdate: (newData, oldData) =>
-                new Promise((resolve) => {
-                  handleRowUpdate(newData, oldData, resolve);
+                onRowUpdate: (newData, oldData) =>
+                  new Promise((resolve) => {
+                    handleRowUpdate(newData, oldData, resolve);
 
-                }),
-              onRowAdd: (newData) =>
-                new Promise((resolve) => {
-                  handleRowAdd(newData, resolve)
-                }),
-              // onRowDelete: (oldData) =>
-              //   new Promise((resolve) => {
-              //     handleRowDelete(oldData, resolve)
-              //   }),
-            }}
+                  }),
+                onRowAdd: (newData) =>
+                  new Promise((resolve) => {
+                    handleRowAdd(newData, resolve)
+                  }),
+                // onRowDelete: (oldData) =>
+                //   new Promise((resolve) => {
+                //     handleRowDelete(oldData, resolve)
+                //   }),
+              }}
 
-            options={{
-              exportButton: true, exportAllData: true, exportFileName: "TableData"
-            }}
-          />
+              options={{
+                exportButton: true, exportAllData: true, exportFileName: "TableData"
+              }}
+            />
           </div>
         </Grid>
         <Grid item xs={3}></Grid>
@@ -317,5 +318,23 @@ function Demo() {
     </div>
   );
 }
+const mapStateToProps = (state) => ({
 
-export default Demo;
+
+  authToken: state.userReducer.authToken
+
+})
+
+
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+
+  }
+
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Demo)

@@ -22,6 +22,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
+import { connect } from 'react-redux';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -49,20 +50,20 @@ const api = axios.create({
 })
 
 
-function VehicleApproval() {
+function VehicleApproval(props) {
 
   var columns = [
-    {title: "id", field: "id", hidden: true},
-    {title: "Make", field: "make",  editable:"never" },
-    {title: "Model", field: "model", editable:"never" },
-    {title: "Owner", field: "ownerId", editable:"never", hidden: true },
-    {title: "Color", field: "color", editable:"never" },
-    {title: "Year", field: "year", editable:"never" },
-    {title: "Registration Number", field: "registrationNumber", editable:"never" },
-    {title: "Registration State", field: "registrationState", editable:"never" },
-    {title: "VIN", field: "VIN", editable:"never" },
-    {title: "Insurance Number", field: "insuranceNumber", editable:"never" },
-    {title: "Status", field: "status" , lookup: { Approved: "Approved", Requested: "Requested" }},
+    { title: "id", field: "id", hidden: true },
+    { title: "Make", field: "make", editable: "never" },
+    { title: "Model", field: "model", editable: "never" },
+    { title: "Owner", field: "ownerId", editable: "never", hidden: true },
+    { title: "Color", field: "color", editable: "never" },
+    { title: "Year", field: "year", editable: "never" },
+    { title: "Registration Number", field: "registrationNumber", editable: "never" },
+    { title: "Registration State", field: "registrationState", editable: "never" },
+    { title: "VIN", field: "VIN", editable: "never" },
+    { title: "Insurance Number", field: "insuranceNumber", editable: "never" },
+    { title: "Status", field: "status", lookup: { Approved: "Approved", Requested: "Requested" } },
   ]
   const [data, setData] = useState([]); //table data
 
@@ -70,136 +71,149 @@ function VehicleApproval() {
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
 
-  useEffect(() => { 
+  useEffect(() => {
     // api.get("/getAll?authorization=")
-    api.get("/getAdminAll",{ headers: {"authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0`} })    
-    .then(res => {  
-            console.log(res) 
-            console.log(res.data.code )
-            if (res.data.code === 0){            
-                console.log(res.data.result.vehicles)
-                setData(res.data.result.vehicles)
-            }
-         })
-         .catch(error=>{
-             console.log("Error")
-         })
+    api.get("/getAdminAll", { headers: { "authorization": "Bearer " + props.authToken } })
+      .then(res => {
+        console.log(res)
+        console.log(res.data.code)
+        if (res.data.code === 0) {
+          console.log(res.data.result.vehicles)
+          setData(res.data.result.vehicles)
+        }
+      })
+      .catch(error => {
+        console.log("Error")
+      })
   }, [])
 
   const handleRowUpdate = (newData, oldData, resolve) => {
     //validation
     let errorList = []
-    if(newData.id === undefined){
+    if (newData.id === undefined) {
       errorList.push("Please enter make of the vehicle")
     }
-    
-    if(newData.status === undefined){
+
+    if (newData.status === undefined) {
       errorList.push("Please enter a valid description")
     }
 
     const updatedStatus = newData.status;
     const vehicleId = newData.id;
 
-    
+
     var qs = require('qs');
     var requestData = qs.stringify({
       'updatedStatus': updatedStatus,
-      'vehicleId': vehicleId 
+      'vehicleId': vehicleId
     });
 
     const requestOptions = {
       // method: 'POST',
-      headers: { "authorization" : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmYwNDAyY2Q1MDAwMTQ3NjkxZTE4ODEiLCJpYXQiOjE2NjAwMDM1NzJ9.vFeBzCP5xij4JuksZTlSUanwor1rNxPSkxO-_pSSex0` },
-      
-  };
+      headers: { "authorization": "Bearer " + props.authToken },
 
-    if(errorList.length < 1){
+    };
+
+    if (errorList.length < 1) {
       api.post("/changeStatus", requestData, requestOptions)
-      .then(res => {
-        console.log(res)
-        console.log(newData)
-        const dataUpdate = [...data];
-        const index = oldData.id;
-        console.log(index)
-        console.log(newData.id)
-        console.log(res.data.vehicles)
-        dataUpdate[index] = newData;
-        var newArry:[] = data.map(obj=>{
-            if(obj.id===oldData.id)
-            return newData
+        .then(res => {
+          console.log(res)
+          console.log(newData)
+          const dataUpdate = [...data];
+          const index = oldData.id;
+          console.log(index)
+          console.log(newData.id)
+          console.log(res.data.vehicles)
+          dataUpdate[index] = newData;
+          var newArry: [] = data.map(obj => {
+            if (obj.id === oldData.id)
+              return newData
             return obj
+          })
+          setData(newArry);
+
+          resolve()
+          setIserror(false)
+          setErrorMessages([])
         })
-        setData(newArry);
-        
-        resolve()
-        setIserror(false)
-        setErrorMessages([])
-      })
-      .catch(error => {
-        setErrorMessages(["Update failed! Server error"])
-        setIserror(true)
-        resolve()
-        
-      })
-    }else{
+        .catch(error => {
+          setErrorMessages(["Update failed! Server error"])
+          setIserror(true)
+          resolve()
+
+        })
+    } else {
       setErrorMessages(errorList)
       setIserror(true)
       resolve()
 
     }
-    
+
   }
-  
 
-  
-  
 
-  
+
+
+
+
 
 
   return (
-    
-    <div style={{ alignItems: "center", display: "flex", justifyContent: "center", margin: "20px"}}>
-    <div className="App" style={{width: "80%", alignItems: "center", justifyContent: "center"}}>
-           <Grid container spacing={1}>
+
+    <div style={{ alignItems: "center", display: "flex", justifyContent: "center", margin: "20px" }}>
+      <div className="App" style={{ width: "80%", alignItems: "center", justifyContent: "center" }}>
+        <Grid container spacing={1}>
           <Grid item md={12}></Grid>
           <Grid item md={12}>
-          <div>
-            {iserror && 
-              <Alert severity="error">
+            <div>
+              {iserror &&
+                <Alert severity="error">
                   {errorMessages.map((msg, i) => {
-                      return <div key={i}>{msg}</div>
+                    return <div key={i}>{msg}</div>
                   })}
-              </Alert>
-            }       
-          </div>
+                </Alert>
+              }
+            </div>
             <MaterialTable
               title="Service providers Details"
               columns={columns}
               data={data}
               icons={tableIcons}
               editable={{
-                
-            
+
+
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve) => {
-                      handleRowUpdate(newData, oldData, resolve);
-                      
+                    handleRowUpdate(newData, oldData, resolve);
+
                   }),
-                
+
               }}
-          
+
               options={{
-                exportButton: true,exportAllData: true, exportFileName: "TableData", actionsColumnIndex: -1
+                exportButton: true, exportAllData: true, exportFileName: "TableData", actionsColumnIndex: -1
               }}
             />
           </Grid>
           <Grid item md={12}></Grid>
         </Grid>
 
-    </div>
+      </div>
     </div>
   );
 }
+const mapStateToProps = (state) => ({
+  authToken: state.userReducer.authToken
 
-export default VehicleApproval;
+})
+
+
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+
+  }
+
+}
+export default connect(mapStateToProps, mapDispatchToProps)(VehicleApproval);

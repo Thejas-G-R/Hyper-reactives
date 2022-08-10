@@ -65,7 +65,7 @@ exports.signin = (req, res) => {
 
         // Send response
         const { _id, name, email } = user
-        const admin = false
+        var admin = false
         if (email == 'admin@gmail.com')
             admin = true
 
