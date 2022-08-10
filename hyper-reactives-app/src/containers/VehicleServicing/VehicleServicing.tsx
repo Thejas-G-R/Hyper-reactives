@@ -85,49 +85,39 @@ export const VehicleServicing = (props: any) => {
     }
     return (
         <div className='outer'>
-        <Card className='vehicleServicingContainer'>
-            <div className="searchBar">
-                <div className="input-group mb-3 inputBar" >
-                    <input type="text" className="form-control" placeholder="Enter Location" aria-label="Enter Location" aria-describedby="basic-addon2" style={{ borderRadius: "40px 0 0 40px" }} />
-                    <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" type="button" style={{ borderRadius: "0px 40px 40px 0px" }}>
-                            <SearchIcon sx={{ fontSize: 20 }} />
-                        </button>
-                    </div>
+            <Card className='vehicleServicingContainer'>
+                <div className="serviceProviderList">
+                    <ListGroup as="ul" className='listGroup'>
+                        {serviceProviders.map(renderListItems)}
+                    </ListGroup>
                 </div>
-            </div>
-            <div className="serviceProviderList">
-                <ListGroup as="ul" className='listGroup'>
-                    {serviceProviders.map(renderListItems)}
-                </ListGroup>
-            </div>
-            {(typeof receiptData === 'object' && receiptData != null && Object.keys(receiptData).length !== 0) ? <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header>
-                    <Modal.Title>{constants.RECEIPT_HEADING}</Modal.Title>
-                    <Button type='button' variant='light' onClick={handleClose} className=""><CloseIcon /></Button>
-                </Modal.Header>
-                <Modal.Body>
-                    <Card className='ala'>
-                        <p>Date: {receiptData.date}</p>
-                        <p>Service Provider: {receiptData.serviceProvider.name}</p>
-                        <p>Address: {receiptData.serviceProvider.address.street}, {receiptData.serviceProvider.address.city}, {receiptData.serviceProvider.address.state}, {receiptData.serviceProvider.address.zipcode}</p>
-                        <p>Car: {receiptData.vehicle.make} {receiptData.vehicle.model}</p>
-                        <p>Registration Number: {receiptData.vehicle.registrationNumber}</p>
-                        <p>Mileage: {receiptData.mileage}</p>
-                        <p>Description: {receiptData.description}</p>
-                        <p>Price: {receiptData.price}</p>
-                    </Card>
-                </Modal.Body>
-                <Modal.Footer>
-                    <button className='press1' onClick={callApproveReceiptApi}>Approve</button>
-                </Modal.Footer>
-            </Modal> : null}
-            {/* <ToastContainer position='middle-center'>
+                {(typeof receiptData === 'object' && receiptData != null && Object.keys(receiptData).length !== 0) ? <Modal
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header>
+                        <Modal.Title>{constants.RECEIPT_HEADING}</Modal.Title>
+                        <Button type='button' variant='light' onClick={handleClose} className=""><CloseIcon /></Button>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Card className='ala'>
+                            <p>Date: {receiptData.date}</p>
+                            <p>Service Provider: {receiptData.serviceProvider.name}</p>
+                            <p>Address: {receiptData.serviceProvider.address.street}, {receiptData.serviceProvider.address.city}, {receiptData.serviceProvider.address.state}, {receiptData.serviceProvider.address.zipcode}</p>
+                            <p>Car: {receiptData.vehicle.make} {receiptData.vehicle.model}</p>
+                            <p>Registration Number: {receiptData.vehicle.registrationNumber}</p>
+                            <p>Mileage: {receiptData.mileage}</p>
+                            <p>Description: {receiptData.description}</p>
+                            <p>Price: {receiptData.price}</p>
+                        </Card>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button className='press1' onClick={callApproveReceiptApi}>Approve</button>
+                    </Modal.Footer>
+                </Modal> : null}
+                {/* <ToastContainer position='middle-center'>
                 <Toast onClose={() => {
                     setIsServiceReceiptApproved(false)
                 }} show={isServiceReceiptApproved} delay={3000} autohide bg='success'>
@@ -137,7 +127,7 @@ export const VehicleServicing = (props: any) => {
                     <Toast.Body>Your service history has now been updated! </Toast.Body>
                 </Toast>
             </ToastContainer> */}
-        </Card>
+            </Card>
         </div>
 
     )
