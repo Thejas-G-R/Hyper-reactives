@@ -65,9 +65,14 @@ exports.signin = (req, res) => {
 
         // Send response
         const { _id, name, email } = user
+        const admin = false
+        if (email == 'admin@gmail.com')
+            admin = true
+
         return res.status(200).json({
             code: 0,
             message: 'Success',
+            admin: admin,
             token,
             user: {
                 _id,
