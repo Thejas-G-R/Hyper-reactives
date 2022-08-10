@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import SearchIcon from '@mui/icons-material/Search';
 import "./VehicleServicing.scss"
 import { approveServiceReceipt, getServiceProviders, getServiceReceipt, resetApprovedFlag } from '../../redux/actions/actions';
-import { Button, ListGroup, ListGroupItem, Modal, Toast, ToastContainer } from 'react-bootstrap';
+import { Button, Card, ListGroup, ListGroupItem, Modal, Toast, ToastContainer } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { constants } from '../../utils/constants';
 import CloseIcon from '@mui/icons-material/Close';
@@ -78,13 +78,14 @@ export const VehicleServicing = (props: any) => {
                     </div>
                 </div>
                 <div className="requestServiceButton">
-                    <Button onClick={() => handleShow(serviceProvider)} className="serviceHereButton">Service here</Button>
+                    <button className='press' onClick={() => handleShow(serviceProvider)}>Service here</button>
                 </div>
             </div>
         </ListGroupItem >)
     }
     return (
-        <div className='vehicleServicingContainer'>
+        <div className='outer'>
+        <Card className='vehicleServicingContainer'>
             <div className="searchBar">
                 <div className="input-group mb-3 inputBar" >
                     <input type="text" className="form-control" placeholder="Enter Location" aria-label="Enter Location" aria-describedby="basic-addon2" style={{ borderRadius: "40px 0 0 40px" }} />
@@ -111,17 +112,19 @@ export const VehicleServicing = (props: any) => {
                     <Button type='button' variant='light' onClick={handleClose} className=""><CloseIcon /></Button>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Service Provider: {receiptData.serviceProvider.name}</p>
-                    <p>Address: {receiptData.serviceProvider.address.street}, {receiptData.serviceProvider.address.city}, {receiptData.serviceProvider.address.state}, {receiptData.serviceProvider.address.zipcode}</p>
-                    <p>Car: {receiptData.vehicle.make} {receiptData.vehicle.model}</p>
-                    <p>Registration Number: {receiptData.vehicle.registrationNumber}</p>
-                    <p>Mileage: {receiptData.mileage}</p>
-                    <p>Price: {receiptData.price}</p>
-                    <p>Date: {receiptData.date}</p>
-                    <p>Description: {receiptData.description}</p>
+                    <Card className='ala'>
+                        <p>Date: {receiptData.date}</p>
+                        <p>Service Provider: {receiptData.serviceProvider.name}</p>
+                        <p>Address: {receiptData.serviceProvider.address.street}, {receiptData.serviceProvider.address.city}, {receiptData.serviceProvider.address.state}, {receiptData.serviceProvider.address.zipcode}</p>
+                        <p>Car: {receiptData.vehicle.make} {receiptData.vehicle.model}</p>
+                        <p>Registration Number: {receiptData.vehicle.registrationNumber}</p>
+                        <p>Mileage: {receiptData.mileage}</p>
+                        <p>Description: {receiptData.description}</p>
+                        <p>Price: {receiptData.price}</p>
+                    </Card>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={callApproveReceiptApi}>{constants.ACCEPT_RECEIPT_TEXT}</Button>
+                    <button className='press1' onClick={callApproveReceiptApi}>Approve</button>
                 </Modal.Footer>
             </Modal> : null}
             {/* <ToastContainer position='middle-center'>
@@ -134,6 +137,7 @@ export const VehicleServicing = (props: any) => {
                     <Toast.Body>Your service history has now been updated! </Toast.Body>
                 </Toast>
             </ToastContainer> */}
+        </Card>
         </div>
 
     )

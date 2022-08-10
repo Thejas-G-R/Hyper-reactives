@@ -3,19 +3,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 25px;
 }
 
 .inputBar {
-    width: 45%;
+    margin: 15px;
 }
 
 .listGroupItem {
     margin: 10px 0;
+    border-radius: 20px !important;
 }
 
 .listGroup {
-    width: 45%;
+    width: 100%;
+    margin: 15px
 }
 
 .serviceProvidersList {
@@ -34,7 +35,6 @@
 }
 
 .serviceProviderDetails {
-    margin-right: 5%;
     width: 65%;
 }
 
@@ -42,6 +42,55 @@
     width: 30%;
 }
 
-.serviceHereButton {
+.outer {
+    display: flex;
+    justify-content: center;
+}
+
+.vehicleServicingContainer {
+    border-radius: 20px;
+    width: 50%;
+    padding-bottom: 40px;
+    margin: 50px;
+}
+
+.press {
+    color: #2c2a2f !important;
+    display: block;
+    width: 150px;
+    height: 52px;
+    font-size: 14px;
+    background: #f3ebf2 !important;
+    border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 40px;
     float: right;
+}
+
+.press1 {
+    color: #2c2a2f !important;
+    display: block;
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+    background: #f3ebf2 !important;
+    border: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 40px;
+    float: right;
+}
+
+.ala {
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.modal-content {
+    border-radius: 20px;
+}
+
+.modal-title {
+    margin-left: 10px;
 }
