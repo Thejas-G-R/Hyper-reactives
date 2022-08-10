@@ -13,7 +13,8 @@ export const TimeLineComponent = (props: any) => {
             <TimelineItem
                 key={index}
                 dateText={serviceHistoryItem.date}
-                style={{ color: '#e86971' }}
+                style={{ color: '#7a6d72' }}
+                dateInnerStyle={{ background: 'rgba(130, 78, 98, 1)' }}
             >
                 <h3>{serviceHistoryItem.serviceProviderName}</h3>
                 <h4>{address}</h4>

@@ -3,17 +3,31 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 30px;
+    background: linear-gradient(180deg, rgba(130, 78, 98, 1) 20%, rgba(55, 52, 61, 1) 100%);
+    border-radius: 0px 0px 40px 40px !important;
+    padding-top: 30px;
+    padding-bottom: 50px;
 }
+
+//background-color: linear-gradient(180deg, rgba(130, 78, 98, 1) 0%, rgba(55, 52, 61, 1) 100%)
 
 .firstHalf,
 .secondHalf {
     width: 45%;
+    color: white;
+    text-align: center;
+}
+
+.firstHalf-1 {
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    font-size: 20px;
 }
 
 .vehicleDetails {
     padding: 10px;
-    margin-bottom: 20px;
+    margin: 40px;
 }
 
 .vechileActionsContainer {
@@ -21,7 +35,10 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    padding: 30px;
+    padding: 40px;
+    background: #f3ebf2;
+    text-align: center;
+    font-size: 18px;
 }
 
 .serviceYourVehicle,
@@ -31,13 +48,44 @@
 
 .buttonContainer {
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .timeLineText {
-    background-color: rgb(246, 246, 246);
+    background-color: #7e7390;
     text-align: center;
-    height: 50px;
     align-items: center;
     display: flex;
     justify-content: center;
+    padding: 80px;
+    font-weight: 600;
+    color: white;
+    font-size: 35px;
+}
+
+.yourvehicle {
+    border-radius: 40px;
+}
+
+.vh {
+    border-radius: 40px 40px 0px 0px !important;
+    text-align: center;
+    background-color: rgba(130, 78, 98, 1);
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    border: none;
+}
+
+.but {
+    color: #fff !important;
+    display: block;
+    width: 200px;
+    height: 56px;
+    font-weight: 600;
+    background: #7a6d72 !important;
+    border: none;
+    text-transform: uppercase;
+    border-radius: 40px;
 }

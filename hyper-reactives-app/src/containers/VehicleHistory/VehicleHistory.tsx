@@ -38,35 +38,34 @@ export const VehicleHistory = (props: any) => {
     return (
         <div className='vehicleHistoryContainer' ref={componentRef}>
             <div className='vehicleDetails'>
-                <Card border="info" style={{ width: '100%' }}>
-                    <Card.Header>Your Vechicle</Card.Header>
+                <Card className='yourvehicle' border="info" style={{ width: '100%' }}>
+                    <Card.Header className='vh'>Your {vehicle.make} {vehicle.model}</Card.Header>
                     <Card.Body className='cardInfo'>
                         <div className="firstHalf">
-                            <Card.Title>{vehicle.make} {vehicle.model}</Card.Title>
-                            <Card.Subtitle >Color</Card.Subtitle>
-                            <Card.Text className='text-muted'>
+                            <Card.Text >Car Color</Card.Text>
+                            <Card.Text className='firstHalf-1'>
                                 {vehicle.color}
                             </Card.Text>
-                            <Card.Subtitle >Year</Card.Subtitle>
-                            <Card.Text className='text-muted'>
+                            <Card.Text >Year of make</Card.Text>
+                            <Card.Text className='firstHalf-1'>
                                 {vehicle.year}
                             </Card.Text>
-                            <Card.Subtitle >Registration Number</Card.Subtitle>
-                            <Card.Text className='text-muted'>
+                            <Card.Text >Registration Number</Card.Text>
+                            <Card.Text className='firstHalf-1'>
                                 {vehicle.registrationNumber}
                             </Card.Text>
                         </div>
                         <div className="secondHalf">
-                            <Card.Subtitle >Registration State</Card.Subtitle>
-                            <Card.Text className='text-muted'>
+                            <Card.Text >Registration State</Card.Text>
+                            <Card.Text className='firstHalf-1'>
                                 {vehicle.registrationState}
                             </Card.Text>
-                            <Card.Subtitle >VIN</Card.Subtitle>
-                            <Card.Text className='text-muted'>
+                            <Card.Text >VIN</Card.Text>
+                            <Card.Text className='firstHalf-1'>
                                 {vehicle.VIN}
                             </Card.Text>
-                            <Card.Subtitle >Insurance Number</Card.Subtitle>
-                            <Card.Text className='text-muted'>
+                            <Card.Text >Insurance Number</Card.Text>
+                            <Card.Text className='firstHalf-1'>
                                 {vehicle.insuranceNumber}
                             </Card.Text>
                         </div>
@@ -79,7 +78,7 @@ export const VehicleHistory = (props: any) => {
                         {constants.GET_SERVICING_DONE_TEXT}
                     </div>
                     <div className="buttonContainer">
-                        <Button type='button' variant='warning' size='lg'>Service now</Button>
+                        <button type='button' className='but'>Service now</button>
                     </div>
                 </div>
                 <div className="printServiceHistoryContainer">
@@ -87,7 +86,7 @@ export const VehicleHistory = (props: any) => {
                         {constants.PRINT_SERVICING_HISTORY}
                     </div>
                     <div className="buttonContainer">
-                        <Button type='button' variant='warning' size='lg' onClick={handlePrint}>Print PDF</Button>
+                        <button type='button' className='but' onClick={handlePrint}>Print PDF</button>
                     </div>
                 </div>
             </div>
