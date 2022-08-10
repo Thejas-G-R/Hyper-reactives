@@ -11,6 +11,7 @@ import VehicleApproval from './components/AdminPage/vehicle-approval';
 import BasicLayout from './containers/BasicLayout/BasicLayout';
 import RegisterVehicle from './containers/RegisterVehicle/RegisterVehicle';
 import VehicleHistory from './containers/VehicleHistory/VehicleHistory';
+import PageNotFound from './components/404Page/404Page';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         </Route>
 
 
-        {/* <Route path="*" element={<PageNotFound />} /> */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes >
     </Router >
 
