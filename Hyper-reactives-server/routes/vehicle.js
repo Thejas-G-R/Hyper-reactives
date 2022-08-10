@@ -12,6 +12,6 @@ router.get('/getAll', authenticate, getAllVehicles)
 
 router.get('/getAdminAll', adminAuthenticate, getAllVehiclesAdmin)
 
-router.post('/getServiceHistory', authenticate, getServiceHistory)
+router.get('/getServiceHistory', authenticate, getServiceHistory)
 
 module.exports = router 
