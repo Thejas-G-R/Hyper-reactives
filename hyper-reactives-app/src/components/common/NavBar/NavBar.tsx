@@ -8,7 +8,14 @@ import "./NavBar.scss"
 
 export const NavBar = (props: any) => {
     const navigate = useNavigate()
-    const pageName = window.location.href ? window.location.href.includes("layout") ? "Dashboard" : null : null
+    var pageName = "Home";
+    pageName = window.location.href ? window.location.href.includes("layout") ? "Dashboard" : pageName : pageName;
+    pageName = window.location.href ? window.location.href.includes("vehicle-history") ? "Vehicle Service History" : pageName : pageName;
+    pageName = window.location.href ? window.location.href.includes("vehicle-servicing") ? "Service Center" : pageName : pageName;
+    pageName = window.location.href ? window.location.href.includes("admin") ? "Admin Controls" : pageName : pageName;
+    pageName = window.location.href ? window.location.href.includes("register-vehicle") ? "Register Vehicle" : pageName : pageName;
+    pageName = window.location.href ? window.location.href.includes("vehicle-approval") ? "Admin Controls" : pageName : pageName;
+
     return (
         <>
             <Navbar collapseOnSelect expand="lg" variant="light" className='navbar'>
