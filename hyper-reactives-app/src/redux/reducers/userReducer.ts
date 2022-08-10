@@ -1,8 +1,9 @@
-import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS, USER_GET_CARS_SUCCESS, CAR_SERVICE_HISTORY_SUCCESS } from "../types/actionTypes";
+import { USER_SIGN_UP_SUCCESS, USER_SIGN_IN_SUCCESS, USER_GET_CARS_SUCCESS, CAR_SERVICE_HISTORY_SUCCESS, VEHICLE_REG_SUCCESS } from "../types/actionTypes";
 
 var initialState = {
     signInSuccess: false,
     signUpSuccess: false,
+    vehicleRegistrationSuccess: false
 }
 
 export const userReducer = (state = initialState, action: { type: string, data: any }) => {
@@ -36,6 +37,13 @@ export const userReducer = (state = initialState, action: { type: string, data: 
             else if (serviceHistory.length === 0)
                 return { ...state, serviceHistory: [...serviceHistory], hasServiceHistory: false }
             return state
+
+        case VEHICLE_REG_SUCCESS:
+            console.log(action.data, "reducer data");
+            if (action.data === "Success")
+                return { ...state, vehicleRegistrationSuccess: true };
+            return state
+            
         default:
             return state
     }
