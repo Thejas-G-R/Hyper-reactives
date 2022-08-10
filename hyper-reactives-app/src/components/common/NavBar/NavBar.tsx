@@ -15,7 +15,10 @@ export const NavBar = (props: any) => {
                 <Container fluid>
                     <Navbar.Brand className='name' onClick={() => {
                         props.resetFlags()
-                        navigate("/layout")
+                        if (props.isAdmin)
+                            navigate("/layout/admin")
+                        else if (!props.isAdmin)
+                            navigate("/layout")
                     }}>{constants.COMPANY_NAME}</Navbar.Brand>
                     <Nav className="justify-content-center flex-grow-1 pe-3">
                         <div className='navHeading'>{pageName}</div>
@@ -30,7 +33,7 @@ export const NavBar = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => ({
-
+    isAdmin: state.userReducer.isAdmin
 })
 
 const mapDispatchToProps = (dispatch) => {

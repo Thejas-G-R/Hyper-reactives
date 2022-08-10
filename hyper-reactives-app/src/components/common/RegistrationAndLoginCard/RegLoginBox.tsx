@@ -11,6 +11,7 @@ const mapStateToProps = (state: any) => {
     return {
         signInSuccess: state.userReducer.signInSuccess,
         signUpSuccess: state.userReducer.signUpSuccess,
+        isAdmin: state.userReducer.isAdmin
     };
 };
 const mapDispatchToProps = (dispatch: any) => {
@@ -40,7 +41,9 @@ function RegLoginBox(props: any) {
             navigate("/login")
     }, [navigate, props.signUpSuccess]);
     useEffect(() => {
-        if (props.signInSuccess === true)
+        if (props.signInSuccess === true && props.isAdmin === true)
+            navigate("/layout/admin")
+        else if (props.signInSuccess === true)
             navigate("/layout")
     }, [navigate, props.signInSuccess]);
 

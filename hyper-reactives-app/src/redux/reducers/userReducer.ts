@@ -5,6 +5,7 @@ var initialState = {
     signUpSuccess: false,
     vehicleRegistrationSuccess: false,
     isServiceReceiptApproved: false,
+    isAdmin: false
 }
 
 export const userReducer = (state = initialState, action: { type: string, data: any }) => {
@@ -16,10 +17,10 @@ export const userReducer = (state = initialState, action: { type: string, data: 
                 return { ...state, signUpSuccess: true };
             return state
         case USER_SIGN_IN_SUCCESS:
-            const { token, user } = action.data;
+            const { token, user, admin } = action.data;
             const { name, email } = user;
             if (action.data && action.data.token.length > 0) {
-                return { ...state, authToken: token, name: name, emailId: email, signInSuccess: true }
+                return { ...state, authToken: token, name: name, emailId: email, signInSuccess: true, isAdmin: admin }
             }
             return state
 

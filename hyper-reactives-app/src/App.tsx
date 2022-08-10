@@ -21,14 +21,14 @@ function App() {
         <Route path="/" element={<Navigate replace to="signup" />} />
         <Route path="signup" element={<UserRegistration />}></Route>
         <Route path="login" element={<UserLogin />}></Route>
-        <Route path="admin" element={<AdminPage />}></Route>
-        <Route path="vehicle-approval" element={<VehicleApproval />}></Route>
 
-        <Route path="Layout" element={<BasicLayout />}>
+        <Route path="layout" element={<BasicLayout />}>
           <Route index element={<Dashboard />} />
+          <Route path="admin" element={<AdminPage />}></Route>
           <Route path='register-vehicle' element={<RegisterVehicle />} />
           <Route path='vehicle-history' element={<VehicleHistory />} />
           <Route path='vehicle-servicing' element={<VehicleServicing />} />
+          <Route path="vehicle-approval" element={<VehicleApproval />}></Route>
         </Route>
 
 
